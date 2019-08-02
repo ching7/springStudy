@@ -4,7 +4,22 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         ">
-
+    <!--spring-jdbc的jar中-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value=""></property>
+        <property name="url" value=""></property>
+        <property name="username" value=""></property>
+        <property name="password" value=""></property>
+    </bean>
+    <!--spring连接mybatis-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--扫描器-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value=""></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryBean"></property>
+    </bean>
     <bean id="people" class="com.cyn.bean.People" >
         <constructor-arg index="0" value="cyn"/>
         <constructor-arg index="1" value="123"/>
