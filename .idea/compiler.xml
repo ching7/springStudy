@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spring01-runtime" />
+        <module name="validCode" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="spring01-runtime" target="1.5" />
+      <module name="validCode" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
