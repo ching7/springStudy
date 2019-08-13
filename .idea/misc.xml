@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/spring01-runtime/pom.xml" />
         <option value="$PROJECT_DIR$/validCode/pom.xml" />
+        <option value="$PROJECT_DIR$/spring02-mybatis/pom.xml" />
       </list>
     </option>
   </component>
