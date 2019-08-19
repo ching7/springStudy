@@ -20,4 +20,9 @@
         <property name="basePackage" value="com.cyn.mapper"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"></property>
     </bean>
+    <!--简化serviceImpl中的加载mapper中的方法-->
+    <!--由spring来管理类，需要注入的类，必须被spring管理-->
+    <bean id="userService" class="com.cyn.service.impl.UserServiceImpl">
+        <property name="userMapper" ref="userMapper"></property>
+    </bean>
 </beans>

@@ -13,7 +13,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="spring01-runtime" target="1.5" />
-      <module name="spring02-mybatis" target="1.7" />
+      <module name="spring02-mybatis" target="1.8" />
       <module name="validCode" target="1.5" />
     </bytecodeTargetLevel>
   </component>
