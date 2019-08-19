@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        ">
+    <bean id="myBeforeAdvice" class="com.cyn.advice.MyBeforeAdvice"></bean>
+    <bean id="myAfterAdvice" class="com.cyn.advice.MyAfterAdvice"></bean>
+
+    <aop:config>
+        <aop:pointcut id="myPoint" expression="execution(* com.cyn.test.Demo.demo2()) " />
+        <aop:advisor pointcut-ref="myPoint" advice-ref="myBeforeAdvice"/>
+        <aop:advisor pointcut-ref="myPoint" advice-ref="myAfterAdvice"/>
+    </aop:config>
+    <bean id="demoTest" class="com.cyn.test.Demo" ></bean>
+</beans>
