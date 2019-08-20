@@ -11,9 +11,10 @@
     <bean id="myAfterAdvice" class="com.cyn.advice.MyAfterAdvice"></bean>
 
     <aop:config>
-        <aop:pointcut id="myPoint" expression="execution(* com.cyn.test.Demo.demo2()) " />
+        <aop:pointcut id="myPoint" expression="execution(* com.cyn.test.*.*(..)) " />
         <aop:advisor pointcut-ref="myPoint" advice-ref="myBeforeAdvice"/>
         <aop:advisor pointcut-ref="myPoint" advice-ref="myAfterAdvice"/>
     </aop:config>
     <bean id="demoTest" class="com.cyn.test.Demo" ></bean>
+    <bean id="demoTest1" class="com.cyn.test.Demo1" ></bean>
 </beans>
