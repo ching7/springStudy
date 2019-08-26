@@ -7,9 +7,14 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
         ">
+    <!--aop两种配置文件书写方法
+    schema  -对切面方法要求高，配置文件要求低
+    aspectJ -对切面方法要求低，配置文件要求高
+    -->
     <bean id="myBeforeAdvice" class="com.cyn.advice.MyBeforeAdvice"></bean>
     <bean id="myAfterAdvice" class="com.cyn.advice.MyAfterAdvice"></bean>
 
+    <!--aop前置后置通知-->
     <aop:config>
         <aop:pointcut id="myPoint" expression="execution(* com.cyn.test.*.*(..)) " />
         <aop:advisor pointcut-ref="myPoint" advice-ref="myBeforeAdvice"/>
@@ -17,4 +22,14 @@
     </aop:config>
     <bean id="demoTest" class="com.cyn.test.Demo" ></bean>
     <bean id="demoTest1" class="com.cyn.test.Demo1" ></bean>
+
+
+    <!--aop的异常通知-->
+    <bean id="myThrow" class="com.cyn.advice.MyThrowAdvice"></bean>
+    <aop:config>
+        <aop:aspect ref="myThrow"><!--ref 方法在那个类-->
+            <aop:pointcut id="myPoint2" expression="execution(* com.cyn.test.Demo1.Demo11())"/><!--切点-->
+            <aop:after-throwing method="myException" pointcut-ref="myPoint2" throwing="e"/><!--method 切面方法-->
+        </aop:aspect>
+    </aop:config>
 </beans>

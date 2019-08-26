@@ -7,6 +7,7 @@ package com.cyn.test;
  */
 public class Demo1 {
     public void Demo11(){
+        int a = 1/0;
         System.out.println("Demo1-1");
     }
 }
