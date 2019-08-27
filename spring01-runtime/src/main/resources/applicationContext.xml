@@ -42,7 +42,7 @@
         <property name="map">
             <map>
                 <entry key="cyn" value="123"/>
-                <entry key="test" value="2345"></entry>
+                <entry key="demo" value="2345"></entry>
             </map>
         </property>
         <!--依赖注入对象-->
