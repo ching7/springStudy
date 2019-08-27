@@ -8,28 +8,58 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd
         ">
     <!--aop两种配置文件书写方法
-    schema  -对切面方法要求高，配置文件要求低
-    aspectJ -对切面方法要求低，配置文件要求高
+    schema  -对切面方法要求高，配置文件要求低 通知需要实现接口
+    aspectJ -对切面方法要求低，配置文件要求高 通知无需实现接口
     -->
     <bean id="myBeforeAdvice" class="com.cyn.advice.MyBeforeAdvice"></bean>
     <bean id="myAfterAdvice" class="com.cyn.advice.MyAfterAdvice"></bean>
 
-    <!--aop前置后置通知-->
-    <aop:config>
+    <!--aop前置后置通知 schema-base实现 -->
+    <!--<aop:config>
         <aop:pointcut id="myPoint" expression="execution(* com.cyn.test.*.*(..)) " />
         <aop:advisor pointcut-ref="myPoint" advice-ref="myBeforeAdvice"/>
         <aop:advisor pointcut-ref="myPoint" advice-ref="myAfterAdvice"/>
-    </aop:config>
+    </aop:config>-->
     <bean id="demoTest" class="com.cyn.test.Demo" ></bean>
     <bean id="demoTest1" class="com.cyn.test.Demo1" ></bean>
 
 
-    <!--aop的异常通知-->
+    <!--aop的异常通知 aspectJ实现-->
     <bean id="myThrow" class="com.cyn.advice.MyThrowAdvice"></bean>
+    <!--<aop:config>
+        <aop:aspect ref="myThrow">&lt;!&ndash;ref 方法在那个类&ndash;&gt;
+            <aop:pointcut id="myPoint2" expression="execution(* com.cyn.test.Demo1.Demo11())"/>&lt;!&ndash;切点&ndash;&gt;
+            <aop:after-throwing method="myException" pointcut-ref="myPoint2" throwing="e"/>&lt;!&ndash;method 切面方法&ndash;&gt;
+        </aop:aspect>
+    </aop:config>-->
+
+    <!--aop的异常通知 schema-base实现-->
+    <bean id="myThrowSchema" class="com.cyn.advice.MyThrowAdviceSchemaBase"></bean>
     <aop:config>
-        <aop:aspect ref="myThrow"><!--ref 方法在那个类-->
-            <aop:pointcut id="myPoint2" expression="execution(* com.cyn.test.Demo1.Demo11())"/><!--切点-->
-            <aop:after-throwing method="myException" pointcut-ref="myPoint2" throwing="e"/><!--method 切面方法-->
+        <!--<aop:pointcut id="myThrow" expression="execution(* com.cyn.test.Demo1.Demo12())"/>
+        <aop:advisor advice-ref="myThrowSchema" pointcut-ref="myThrow"/>-->
+        <aop:aspect ref="myThrowSchema"><!--ref 方法在那个类-->
+            <aop:pointcut id="myPoint3" expression="execution(* com.cyn.test.Demo1.Demo12())"/><!--切点-->
+            <aop:after-throwing method="afterThrowing" pointcut-ref="myPoint3" throwing="ex"/><!--method 切面方法-->
+        </aop:aspect>
+    </aop:config>
+
+    <!--aop环绕通知-->
+    <bean id="mySurround" class="com.cyn.advice.MySurround"> </bean>
+    <aop:config>
+        <aop:pointcut id="myPoint4" expression="execution(* com.cyn.test.Demo1.Demo13())"/>
+        <aop:advisor advice-ref="mySurround" pointcut-ref="myPoint4"/>
+    </aop:config>
+
+    <!--aspectJ普通通知的写法-->
+    <bean id="myAfterAdviceAspectJ" class="com.cyn.advice.MyAfterAdviceAspectJ"></bean>
+    <aop:config>
+        <aop:aspect ref="myAfterAdviceAspectJ">
+            <!--aspectJ通知 获取切点参数-->
+            <aop:pointcut id="myPoint5" expression="execution( * com.cyn.test.Demo1.Demo14(String,int)) and args(name1,age1))"/>
+           <!-- <aop:after method="after" pointcut-ref="myPoint5" />-->
+            <aop:before method="before" pointcut-ref="myPoint5" arg-names="name1,age1" />
+
         </aop:aspect>
     </aop:config>
 </beans>
