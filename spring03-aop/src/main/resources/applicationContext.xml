@@ -2,11 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
         ">
+    
+    <!--包扫描 扫描注解-->
+    <context:component-scan base-package="com.cyn.advice,com.cyn.test"></context:component-scan>
+    <!--
+    proxy-target-class
+    true cglib动态代理 注解
+    false jdk动态代理
+    -->
+    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+    
     <!--aop两种配置文件书写方法
     schema  -对切面方法要求高，配置文件要求低 通知需要实现接口
     aspectJ -对切面方法要求低，配置文件要求高 通知无需实现接口
@@ -20,7 +33,7 @@
         <aop:advisor pointcut-ref="myPoint" advice-ref="myBeforeAdvice"/>
         <aop:advisor pointcut-ref="myPoint" advice-ref="myAfterAdvice"/>
     </aop:config>-->
-    <bean id="demoTest" class="com.cyn.test.Demo" ></bean>
+    <bean id="demoTest" class="com.cyn.test.Demo123" ></bean>
     <bean id="demoTest1" class="com.cyn.test.Demo1" ></bean>
 
 
@@ -59,7 +72,6 @@
             <aop:pointcut id="myPoint5" expression="execution( * com.cyn.test.Demo1.Demo14(String,int)) and args(name1,age1))"/>
            <!-- <aop:after method="after" pointcut-ref="myPoint5" />-->
             <aop:before method="before" pointcut-ref="myPoint5" arg-names="name1,age1" />
-
         </aop:aspect>
     </aop:config>
 </beans>

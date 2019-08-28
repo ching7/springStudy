@@ -1,6 +1,12 @@
 package com.cyn.test;
 
-public class Demo {
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Demo123 {
+
+    @Pointcut("execution(* com.cyn.test.Demo123.demo1())")
     public void demo1(){
         System.out.println("demo1");
     }
