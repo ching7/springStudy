@@ -28,7 +28,7 @@
      @After,@AfterThrowing,@Around类似
      
      参考对比：无注解写法
-<!--aspectJ普通通知的写法-->
+      <!--aspectJ普通通知的写法-->
          <bean id="myAfterAdviceAspectJ" class="com.cyn.advice.MyAfterAdviceAspectJ"></bean>
          <aop:config>
              <aop:aspect ref="myAfterAdviceAspectJ">
@@ -38,10 +38,7 @@
                  <aop:before method="before" pointcut-ref="myPoint5" arg-names="name1,age1" />
              </aop:aspect>
          </aop:config>
-     
-     ~~~
-     
-     
+       
 
 ## 2019-08-27  更新aop异常通知\环绕通知  
 
