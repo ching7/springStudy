@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/spring01-runtime/spring01-runtime.iml" filepath="$PROJECT_DIR$/spring01-runtime/spring01-runtime.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring02-mybatis/spring02-mybatis.iml" filepath="$PROJECT_DIR$/spring02-mybatis/spring02-mybatis.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring03-aop/spring03-aop.iml" filepath="$PROJECT_DIR$/spring03-aop/spring03-aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring04-proxy/spring04-proxy.iml" filepath="$PROJECT_DIR$/spring04-proxy/spring04-proxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/springStudy.iml" filepath="$PROJECT_DIR$/.idea/springStudy.iml" />
       <module fileurl="file://$PROJECT_DIR$/validCode/validCode.iml" filepath="$PROJECT_DIR$/validCode/validCode.iml" />
     </modules>
