@@ -15,6 +15,7 @@ public class Laozong implements Gongneng {
 
     @Override
     public void xiaomubiao() {
+        System.out.println("老板的小目标");
 
     }
 }

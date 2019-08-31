@@ -15,6 +15,8 @@ public class Fangwenzhe {
         // 参数2 Proxy需要实现的接
         // 参数3 通过接口方法调用方法时，需要调用哪个类的invoke方法
         Gongneng gongneng = (Gongneng) Proxy.newProxyInstance(Mishu.class.getClassLoader(),new Class[]{Gongneng.class},mishu);
+
         gongneng.chifan();
+        gongneng.xiaomubiao();
     }
 }

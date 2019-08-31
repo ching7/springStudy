@@ -2,6 +2,31 @@
 
 ---
 
+## 2019-09-01 cglib动态代理模式
+
+* 优点
+  * 基于字节码文件，生成真实代理对象的子类
+  * 运行效率高于JDK动态代理
+  * 不需要实现接口
+  * 
+
+* 缺点
+
+  * 需要导入jar
+
+* ***springAOP***使用时，只要出现类型proxy和真实对象转换异常,需要关注下面的配置文件
+
+  ~~~java
+  <!--
+      proxy-target-class
+      true cglib动态代理 注解
+      false jdk动态代理
+      -->
+      <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+  ~~~
+
+  
+
 ## 2019-08-29 代理设计模式
 
 * 什么是代理设计模式 

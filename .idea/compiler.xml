@@ -9,6 +9,7 @@
         <module name="spring01-runtime" />
         <module name="spring02-mybatis" />
         <module name="spring03-aop" />
+        <module name="spring04-proxy" />
         <module name="validCode" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
       <module name="spring01-runtime" target="1.5" />
       <module name="spring02-mybatis" target="1.8" />
       <module name="spring03-aop" target="1.8" />
+      <module name="spring04-proxy" target="1.6" />
       <module name="validCode" target="1.5" />
     </bytecodeTargetLevel>
   </component>
