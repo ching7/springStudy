@@ -2,6 +2,14 @@
 
 ---
 
+## 2019-09-19 SpringMVC学习
+
+* 重要组件
+  * DispatcherServlet：前端控制器，接受所有请求
+  * HandlerMapping：解析请求格式，判断希望执行那个具体方法
+  * HandlerAdapter：负责调用具体的方法
+  * ViewResovler：试图解析器，解析结果，准备跳转到具体物理视图
+
 ## 2019-09-01 cglib动态代理模式
 
 * 优点
