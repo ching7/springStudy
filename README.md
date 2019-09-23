@@ -9,6 +9,9 @@
   * HandlerMapping：解析请求格式，判断希望执行那个具体方法
   * HandlerAdapter：负责调用具体的方法
   * ViewResovler：试图解析器，解析结果，准备跳转到具体物理视图
+* 配置文件配置springMVC
+  * web.xml(WEB-INF目录下) --> springMVC.xml(src/resource文件夹下)
+* 注解形式配置springMVC
 
 ## 2019-09-01 cglib动态代理模式
 
