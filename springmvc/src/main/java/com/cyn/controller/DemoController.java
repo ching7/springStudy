@@ -12,4 +12,10 @@ public class DemoController {
         System.out.println("测试controller");
         return "index";
     }
+
+    @RequestMapping("/demo")
+    public String demo(){
+        System.out.println("测试controller2demo");
+        return "main";
+    }
 }
