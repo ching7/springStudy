@@ -11,6 +11,10 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <form action="home/demo" method="post">
+    <input type="text" name="name1"><br>
+    <input type="text" name="age"><br>
+    <input type="submit" value="提交"><br>
+  </form>
   </body>
 </html>
