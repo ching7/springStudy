@@ -19,7 +19,6 @@ package com.cyn.bean;
 public class People {
     private String name;
     private int age;
-
     public String getName() {
         return name;
     }

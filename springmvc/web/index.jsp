@@ -11,10 +11,17 @@
     <title>$Title$</title>
   </head>
   <body>
-  <form action="home/demo" method="post">
-    <input type="text" name="name1"><br>
-    <input type="text" name="age"><br>
-    <input type="submit" value="提交"><br>
+  <form action="home/demo3" method="post">
+      <input type="text" name="name1"><br>
+      <input type="text" name="age"><br>
+      <%--<input type="checkbox" name="hover" value="学习">
+      <input type="checkbox" name="hover" value="代码">
+      <input type="checkbox" name="hover" value="运动">
+      <input type="checkbox" name="hover" value="电影">--%>
+      <input type="text" name="people.age"><br>
+      <input type="text" name="people.name"><br>
+      <input type="submit" value="提交"><br>
   </form>
+  <a href="home/download?fileName=js.js">跳转</a>
   </body>
 </html>
