@@ -2,6 +2,60 @@
 
 ---
 
+## 2019-09-27 SpringMVC-文件下载上传
+
+* 需要jar
+
+  ~~~java
+  pom.xml--
+  		<dependency>
+              <groupId>commons-fileupload</groupId>
+              <artifactId>commons-fileupload</artifactId>
+              <version>1.3.1</version>
+          </dependency>
+          <dependency>
+              <groupId>commons-io</groupId>
+              <artifactId>commons-io</artifactId>
+              <version>2.6</version>
+          </dependency>
+  ~~~
+
+* 文件下载
+
+  * 访问资源相应头的时候，没有设置content-disposition,浏览器按照默认的inline 处理，能下载就下载，不能下载就显示
+
+    ~~~java
+    	@RequestMapping(value = "/download")
+        @ResponseBody
+        public void download(String fileName, HttpServletResponse response, HttpServletRequest request) throws IOException {
+            //字符流
+            // response.getWriter();
+            //字节流 设置响应中该文件进行下周
+            response.setHeader("Content-Disposition","attachment;filename=bbb.txt");
+            ServletOutputStream outputStream =  response.getOutputStream();
+            // 资源文件夹的完整路径
+            String path =  request.getServletContext().getRealPath("static");
+            System.out.println(path);
+            File file = new File(path,fileName);
+            byte[] bytes =  FileUtils.readFileToByteArray(file);
+            outputStream.write(bytes);
+            outputStream.flush();
+            outputStream.close();
+        }
+    ~~~
+
+* 文件上传
+
+  ~~~js
+  <form>
+  表单 enctype 属性
+  默认值：application/x-www-form-urlencoded   用于普通表单数据
+  text/plain 大量文字使用，例如邮件，论文
+  multipart/form-data 表单中包含二进制文件
+  ~~~
+
+  
+
 ## 2019-09-19 SpringMVC学习
 
 * 重要组件
