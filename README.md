@@ -2,6 +2,118 @@
 
 ---
 
+## 2019-10-09 SpringBoot学习-整合视图层技术
+
+* 整合jsp
+
+  * 1.创建项目
+
+  * 2.修改pom.xml添加依赖
+
+    ~~~xml
+      	<!--父工程依赖-->
+    	<parent>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+            <version>2.1.6.RELEASE</version>
+        </parent>
+        <dependencies>
+            <!--spring-boot-starter-web启动器，支持全栈式的web开发，包括了tomcat和springMVC等jar-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+           
+            <!--用于jsp的编写-->
+            <!--jstl标签库-->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+            </dependency>
+            <!--jasper-->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    ~~~
+
+  * 3.创建springboot全局配置文件aplication.properties,配置jsp视图解析
+
+    ~~~pr
+    spring.mvc.view.prefix=/WEB-INF/jsp
+    spring.mvc.view.suffix=.jsp
+    ~~~
+
+    
+
+  * 4.创建controller
+
+    ~~~java
+    @Controller
+    public class UserController {
+        @RequestMapping("/userListController")
+        public String showUser(Model model){
+            List<Users> list = new ArrayList<>();
+            list.add(new Users(1,"张三",12));
+            list.add(new Users(2,"李四",13));
+            list.add(new Users(3,"王五",14));
+            model.addAttribute("list",list);
+            return "userList";
+        }
+    }
+    ~~~
+
+  * 5.创建jsp
+
+    ~~~jsp
+    <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <table border="1" align="center" width="50%">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+            <c:forEach items="${list}" var="user">
+                <tr>
+                    <td>${user.userId}</td>
+                    <td>${user.userName}</td>
+                    <td>${user.userAge}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </body>
+    </html>
+    ~~~
+
+    
+
+  * 6.创建启动类
+
+    ~~~java
+    @SpringBootApplication
+    @ServletComponentScan
+    public class ApplicationStart {
+        public static void main(String[] args) {
+            SpringApplication.run(ApplicationStart.class,args);
+        }
+    }
+    ~~~
+
+    
+
 ## 2019-10-09 SpringBoot学习-文件上传
 
 * 类似springMVC文件上传
