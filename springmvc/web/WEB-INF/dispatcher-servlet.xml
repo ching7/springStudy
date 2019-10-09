@@ -39,4 +39,27 @@
     <!-- 自动扫描装配 -->
     <context:component-scan base-package="com.cyn.controller"/>
 
+    <!--MultipartResovler 解析器用于文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="50"></property>
+    </bean>
+    <!--异常处理解析器-->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">
+                    /error
+                </prop>
+            </props>
+        </property>
+    </bean>
+    <!--
+        常用解析类
+        1.dispatchServlet 入口解析
+        2.handlerMapping 解析请求解析
+        3.handlerAdapter 调用请求解析
+        4.viewResolver 视图解析
+        5.multipartResolver 文件上传解析
+        6.exceptionResolver 异常解析
+    -->
 </beans>

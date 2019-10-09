@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/home")
@@ -86,7 +89,7 @@ public class DemoController {
     public void download(String fileName, HttpServletResponse response, HttpServletRequest request) throws IOException {
         //字符流
         // response.getWriter();
-        //字节流 设置响应中该文件进行下周
+        //字节流 设置响应中该文件进行下载
         response.setHeader("Content-Disposition","attachment;filename=bbb.txt");
         ServletOutputStream outputStream =  response.getOutputStream();
         // 资源文件夹的完整路径
@@ -97,5 +100,28 @@ public class DemoController {
         outputStream.write(bytes);
         outputStream.flush();
         outputStream.close();
+    }
+
+    /**
+     *
+     * @param uploadFile
+     * @param name
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/upload")
+    public String upload(MultipartFile uploadFile,String name) throws IOException {
+        MultipartResolver mr = null;
+        String fileName = uploadFile.getOriginalFilename();
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+        if (suffix.equalsIgnoreCase(".jpg")){
+            String uuid =  UUID.randomUUID().toString();
+            FileUtils.copyInputStreamToFile(uploadFile.getInputStream(),new File("E:/"+uuid+suffix));
+            System.out.println("name :"+ name);
+            return "main";
+        }else{
+            return "error";
+        }
+
     }
 }

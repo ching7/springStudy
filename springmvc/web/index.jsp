@@ -24,4 +24,10 @@
   </form>
   <a href="home/download?fileName=js.js">跳转</a>
   </body>
+  <hr>
+  <form action="home/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="uploadFile"><br>
+      <input type="text" name="name"><br>
+      <input type="submit" value="提交"><br>
+  </form>
 </html>
