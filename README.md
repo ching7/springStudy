@@ -4,6 +4,16 @@
 
 ## 2019-09-27 SpringMVC-文件下载上传
 
+* 步骤
+
+  ~~~javascript
+  1.导入commons-fileupload,commons-io 
+  2.前台页面一律用post(2GB)字节流  get(2kb)字符流
+  3.配置springMVC解析器：MultipartResolver ,ExceptionResolver
+  ~~~
+
+  
+
 * 需要jar
 
   ~~~java
@@ -47,14 +57,13 @@
 * 文件上传
 
   ~~~js
-  <form>
-  表单 enctype 属性
-  默认值：application/x-www-form-urlencoded   用于普通表单数据
-  text/plain 大量文字使用，例如邮件，论文
-  multipart/form-data 表单中包含二进制文件
+  <form> 表单 enctype 属性取值
+  1、默认值：application/x-www-form-urlencoded   用于普通表单数据
+  2、text/plain 大量文字使用，例如邮件，论文
+  3、multipart/form-data 表单中包含二进制文件
   ~~~
-
   
+
 
 ## 2019-09-19 SpringMVC学习
 
