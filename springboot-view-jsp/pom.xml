@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--继承spring-boot 父工程-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+    </parent>
+    <groupId>com.cyn</groupId>
+    <artifactId>springboot-view-jsp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!--修改jdk版本-->
+    <!--spring-boot 2.0 需要jdk8以上-->
+    <!-- <properties>
+         <java-version>1.8</java-version>
+     <properties/>-->
+
+    <dependencies>
+        <!--spring-boot启动器 共44个-->
+        <!--本质是一系列jar包的集合-->
+
+        <!--spring-boot-starter-web启动器，支持全栈式的web开发，包括了tomcat和springMVC等jar-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--spring-boot-starter-jdbc启动器，支持spring以jdbc方式操作数据库jar的集合-->
+        <!--spring-boot-starter-redis启动器，支持redis的键值存储方式操作数据库jar的集合-->
+
+        <!--用于jsp的编写-->
+        <!--jstl标签库-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <!--jasper-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
