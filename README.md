@@ -2,7 +2,337 @@
 
 ---
 
-## 2019-10-09 SpringBoot学习-整合视图层技术
+## 2019-10-10 SpringBoot学习-整合持久层技术（mybatis）
+
+### 1.整合mybatis-项目初始化
+
+* 1.修改pom
+
+  ~~~xml
+  <!--继承spring-boot 父工程-->
+      <parent>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-parent</artifactId>
+          <version>2.1.6.RELEASE</version>
+      </parent> 
+  	<dependencies>
+          <!--springboot web 启动器-->
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+          </dependency>
+          <!--springboot thymeleaf启动-->
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-thymeleaf</artifactId>
+          </dependency>
+          <!--springboot mybatis 启动器-->
+          <dependency>
+              <groupId>org.mybatis.spring.boot</groupId>
+              <artifactId>mybatis-spring-boot-starter</artifactId>
+              <version>2.0.0-SNAPSHOT</version>
+          </dependency>
+          <!--mysql数据库驱动-->
+          <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+          </dependency>
+          <!--druid 数据库连接池-->
+          <dependency>
+              <groupId>com.alibaba</groupId>
+              <artifactId>druid</artifactId>
+              <version>1.1.12</version>
+          </dependency>
+      </dependencies>
+  ~~~
+
+* 2.配置aplication.properties src/main/resources/properties
+
+  ~~~properties
+  # springboot 整合mybatis配置
+  spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+  spring.datasource.url=jdbc:mysql://local:3306/springboot
+  spring.datasource.username=root
+  spring.datasource.password=root
+  
+  # druid数据库连接池配置
+  spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+  
+  # mybatis 实体类包 别名
+  mybatis.type-aliases-package=com.cyn.bean
+  ~~~
+
+* 3.数据库表设计
+
+  ~~~sql
+  -- 创建表空间
+  create database springBoot default character set utf8 collate utf8_bin;
+  show tables;
+  -- 使用表空间
+  use springBoot;
+  -- 创建表
+  CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ~~~
+
+### 2.添加用户
+
+* 1.创建实体类
+
+  ~~~java
+  public class User {
+      private Integer id;
+      private String name;
+      private Integer age;
+  
+      public Integer getId() {
+          return id;
+      }
+  
+      public void setId(Integer id) {
+          this.id = id;
+      }
+  
+      public String getName() {
+          return name;
+      }
+  
+      public void setName(String name) {
+          this.name = name;
+      }
+  
+      public Integer getAge() {
+          return age;
+      }
+  
+      public void setAge(Integer age) {
+          this.age = age;
+      }
+  }
+  ~~~
+
+  
+
+* 2.创建mappr接口异界映射xml
+
+  ~~~xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.cyn.mapper.UserMapper">
+      <insert id="insertUser" parameterType="user" >
+          insert into users(NAME,AGE) values (#{name},#{age})
+      </insert>
+  
+      <select id="selectUserAll" resultType="user">
+          select id,name,age from users
+      </select>
+  </mapper>
+  ~~~
+
+  ~~~java
+  public interface UserMapper {
+      /**
+       * 用户添加
+       * @param user
+       */
+      void insertUser(User user);
+  
+      /**
+       * 查询所有用户
+       * @return
+       */
+      List<User> selectUserAll();
+  }
+  
+  ~~~
+
+  
+
+* 3.创建service业务层
+
+  ~~~java
+  接口
+  public interface UserService {
+      /**
+       * 用户添加
+       * @param user
+       */
+      void addUser(User user);
+  
+      /**
+       * 查询所有用户
+       * @return
+       */
+      List<User> findUserAll();
+  }
+  
+  实现类
+  @Service
+  @Transactional
+  public class UserServiceImpl  implements UserService {
+  
+      @Autowired(required = false)
+      private UserMapper userMapper;
+  
+      @Override
+      public void addUser(User user) {
+          this.userMapper.insertUser(user);
+      }
+  
+      /**
+       * 查询所有用户
+       *
+       * @return
+       */
+      @Override
+      public List<User> findUserAll() {
+          return  this.userMapper.selectUserAll();
+      }
+  }
+  ~~~
+
+  
+
+* 4.创建controller控制层
+
+  ~~~java
+  @Controller
+  @RequestMapping("/user")
+  public class UserController {
+  
+      @Autowired
+      private UserService userService;
+  
+      /**
+       * 页面跳转
+       * @param page
+       * @return
+       */
+      @RequestMapping("/{page}")
+      public String showPage(@PathVariable String page){
+          return page;
+      }
+  
+      /**
+       * 添加用户
+       * @param user
+       * @return
+       */
+      @RequestMapping("/addUser")
+      public String addUser(User user){
+          this.userService.addUser(user);
+          return "ok";
+      }
+  
+      @RequestMapping("/findUserAll")
+      public String findUserAll(Model model){
+          List<User> list = this.userService.findUserAll();
+          model.addAttribute("list",list);
+          return "showUser";
+      }
+  }
+  ~~~
+
+  
+
+* 5.编写前台模板页面（thymeleaf），需要在src/main/resources下新增templates目录，视图页面存在此目录中
+
+  ~~~html
+  <!doctype html>
+  <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>添加用户</title>
+  </head>
+  <body>
+      <form th:action="@{/user/addUser}" action="" method="post">
+          用户姓名：<input type="text" name="name"><br>
+          用户年龄：<input type="text" name="age"><br>
+          <input type="submit" value="提交">
+      </form>
+  </body>
+  </html>
+  ~~~
+
+  
+
+* 6.编写spring启动类
+
+## 2019-10-10 SpringBoot学习-整合视图层技术（freemarker）
+
+* 整合freemarker
+
+  注：在src/main/resources下必须要有 templates目录。名称路径唯一确定
+
+  * 1.创建项目
+
+  * 2.引入springboot启动器，以及freemarker启动器
+
+    ~~~xml
+    	<!--继承spring-boot 父工程-->
+        <parent>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+            <version>2.1.6.RELEASE</version>
+        </parent>	
+    	<dependencies>
+            <!--spring-boot-starter-web启动器-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+            <!--spring-boot-starter-freemarker启动器-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+            </dependency>
+        </dependencies>
+    ~~~
+
+  * 3.创建freemarker模板
+
+    ~~~html
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>展示用户数据</title>
+    </head>
+    <body>
+        <table border="1" align="center" width="50%">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Age</td>
+            </tr>
+            <#list list as user>
+                <tr>
+                    <td>user.userId</td>
+                    <td>user.userName</td>
+                    <td>user.userAge</td>
+                </tr>
+            </#list>
+        </table>
+    </body>
+    </html>
+    ~~~
+
+  * 4.新建controller 参考jsp
+
+  * 5.新建启动器 参考jsp
+
+## 2019-10-09 SpringBoot学习-整合视图层技术（jsp）
 
 * 整合jsp
 
