@@ -1,8 +1,55 @@
-# Spring学习日记
+# 一、Spring学习日记
 
 ---
 
-## 2019-10-10 SpringBoot学习-整合持久层技术（mybatis）
+## 18、SpringBoot学习-服务端数据校验（2019-10-11 ）
+
+* 1.bean添加注解
+
+  ~~~java
+  @NotBlank(message = "姓名不能为空")
+  
+  原理是用的是hibernate-validator jar中的方法，springboot-start-web启动器中包含改jar
+  ~~~
+
+* 2.controller启用数据校验
+
+  ~~~java
+  /**
+       * 视图跳转
+       * 解决异常的方法：
+       * 由于springmvc会将该对象放入到modelAndView中传递,以类名的驼峰命名作为key
+       * 参数名称必须与对象名称相同，类名首字母小写
+       *
+       * 或者用@ModelAttribute
+       * @param page
+       * @return
+       */
+      @RequestMapping("/{page}")
+      public String showPage(@PathVariable String page,@ModelAttribute("userA") Users users){
+          return page;
+      }
+  
+      /**
+       * 用户添加
+       * @Valid 开启对Users的对象数据校验
+       * @BindingResult 封装了校验的结果
+       * @param users
+       * @return
+       */
+      @RequestMapping("/save")
+      public String saveUser(@ModelAttribute("userA") @Valid Users users, BindingResult result){
+          if (result.hasErrors()){
+              return "add";
+          }
+          System.out.println(users);
+          return "ok";
+      }
+  ~~~
+
+  
+
+## 17、SpringBoot学习-整合持久层技术（mybatis）（2019-10-10 ）
 
 ### 1.整合mybatis-项目初始化
 
@@ -266,7 +313,7 @@
 
 * 6.编写spring启动类
 
-## 2019-10-10 SpringBoot学习-整合视图层技术（freemarker）
+## 16、SpringBoot学习-整合视图层技术（freemarker）（2019-10-10 ）
 
 * 整合freemarker
 
@@ -332,7 +379,7 @@
 
   * 5.新建启动器 参考jsp
 
-## 2019-10-09 SpringBoot学习-整合视图层技术（jsp）
+## 15、SpringBoot学习-整合视图层技术（jsp）（2019-10-09 ）
 
 * 整合jsp
 
@@ -444,7 +491,7 @@
 
     
 
-## 2019-10-09 SpringBoot学习-文件上传
+## 14、SpringBoot学习-文件上传（2019-10-09 ）
 
 * 类似springMVC文件上传
 
@@ -483,7 +530,7 @@
 
   
 
-## 2019-10-09 SpringBoot学习-访问静态资源
+## 13、SpringBoot学习-访问静态资源（2019-10-09 ）
 
 * 1.SpringBoot从classpath/static下
 
@@ -493,7 +540,7 @@
 
   新建目录src/main/webapp，名称必须为webapp 
 
-## 2019-10-09 SpringBoot学习-整合listener
+## 12、SpringBoot学习-整合listener（2019-10-09 ）
 
 * 需要根据不同需求选择不同的监听器
 
@@ -510,7 +557,7 @@
   * 2.1编写listener，无需注解
   * 2.2编写启动类，类似整合filter和servlet
 
-## 2019-10-09 SpringBoot学习-整合filter
+## 11、SpringBoot学习-整合filter（2019-10-09 ）
 
 * 1.通过注解扫描完成filter注册
 
@@ -595,7 +642,7 @@
 
     
 
-## 2019-10-09 SpringBoot学习-整合servlet
+## 10、SpringBoot学习-整合servlet（2019-10-09 ）
 
 * 1.通过注解扫描完成servlet组件的注册
 
@@ -655,7 +702,7 @@
 
     
 
-## 2019-10-09 SpringBoot学习-helloworld
+## 9、SpringBoot学习-helloworld（2019-10-09 ）
 
 * 步骤
 
@@ -697,7 +744,7 @@
 
   
 
-## 2019-09-27 SpringMVC-文件下载上传
+## 8、SpringMVC-文件下载上传（2019-09-27 ）
 
 * 步骤
 
@@ -760,7 +807,7 @@
   
 
 
-## 2019-09-19 SpringMVC学习
+## 7、SpringMVC学习（2019-09-19 ）
 
 * 重要组件
   * DispatcherServlet：前端控制器，接受所有请求
@@ -771,7 +818,7 @@
   * web.xml(WEB-INF目录下) --> springMVC.xml(src/resource文件夹下)
 * 注解形式配置springMVC
 
-## 2019-09-01 cglib动态代理模式
+## 6、cglib动态代理模式（2019-09-01 ）
 
 * 优点
   * 基于字节码文件，生成真实代理对象的子类
@@ -796,7 +843,7 @@
 
   
 
-## 2019-08-29 代理设计模式
+## 5、代理设计模式（2019-08-29 ）
 
 * 什么是代理设计模式 
   1. 真实对象（总裁）
@@ -813,7 +860,7 @@
   2. 每个代理的功能需要单独编写(静态代理不足点)
 
 
-## 2019-08-29 动态代理
+## 4、 动态代理（2019-08-29）
 
 > 为了解决静态代理频繁编写代理方法的缺点
 
@@ -828,7 +875,7 @@
 
 2. ***cglib***动态代理
 
-## 2019-08-28 注解配置aop
+## 3、 注解配置aop（2019-08-28）
 
 *  ***spring***的注解不会自动加载
 
@@ -869,7 +916,7 @@
        
      ~~~
 
-## 2019-08-27  更新aop异常通知\环绕通知  
+## 2、更新aop异常通知\环绕通知  （2019-08-27 ）
 
 > aop的异常通知的schema-base实现
 
@@ -877,7 +924,7 @@
 
 > ***aop***通知的***AspectJ***写法
 
-## 2019-08-27  新增markdown语法记录日志
+## 1、新增markdown语法记录日志（2019-08-27 ）
 
 - 添加***spring***基础运行环境
 
@@ -908,3 +955,239 @@
   ```java
   spring03-aop
   ```
+
+# 二、SpringBoot异常处理以及单元测试
+
+------
+
+## 1、springboot中异常处理的方式（五种）
+
+* 1.1自定义错误页面
+
+  springboot默认处理异常机制，一旦代码出现异常，springboot会向/error的url发送请求。
+
+  在springboot中提供BasicExceptionController来处理 /error请求，跳转到默认页面显示错误信息
+
+  * thtmeleaf前台模板 ->  templates 下新建（名称必须）error.html 页面，所有的异常都会跳转到该页面
+
+* 1.2@ExceptionHandler 注解处理异常
+
+  ~~~java
+  /**
+       * 处理异常java.lang.ArithmeticException
+       *
+       * 该方法需要返回一个ModelAndView,用于封装异常信息，以及 视图的指定
+       *
+       * @param e 产生的异常会注入到e中
+       * @return
+       */
+      @ExceptionHandler(value = {java.lang.ArithmeticException.class})
+      public ModelAndView arithmeticExceptionHandler(Exception e){
+  
+          ModelAndView modelAndView = new ModelAndView();
+          modelAndView.addObject("error",e.toString());
+          modelAndView.setViewName("errorArithmetic");
+          return modelAndView;
+      }
+  
+      /**
+       * 处理异常java.lang.NullPointerException
+       *
+       * 该方法需要返回一个ModelAndView,用于封装异常信息，以及 视图的指定
+       *
+       * @param e 产生的异常会注入到e中
+       * @return
+       */
+      @ExceptionHandler(value = {java.lang.NullPointerException.class})
+      public ModelAndView nullPointerException(Exception e){
+  
+          ModelAndView modelAndView = new ModelAndView();
+          modelAndView.addObject("error",e.toString());
+          modelAndView.setViewName("errorNullpointer");
+          return modelAndView;
+      }
+  
+  // thtmeleaf前台模板 ->  templates 下新建（名称必须）对应的页面，异常会跳转到该页面
+  // 缺点，不同包下的异常需要单独处理
+  ~~~
+
+* 1.3@ControllerAdvice + @ExceptionHandler 注解处理异常
+
+  将所有的异常处理controller放到一个controller 需要使用@ControllerAdvice注解（AOP技术-猜测）
+
+  ~~~java
+  @ControllerAdvice
+  public class GlobalException {
+      /**
+       * 处理异常java.lang.ArithmeticException
+       *
+       * 该方法需要返回一个ModelAndView,用于封装异常信息，以及 视图的指定
+       *
+       * @param e 产生的异常会注入到e中
+       * @return
+       */
+      @ExceptionHandler(value = {java.lang.ArithmeticException.class})
+      public ModelAndView arithmeticExceptionHandler(Exception e){
+  
+          ModelAndView modelAndView = new ModelAndView();
+          modelAndView.addObject("error",e.toString());
+          modelAndView.setViewName("errorArithmetic");
+          return modelAndView;
+      }
+  
+      /**
+       * 处理异常java.lang.NullPointerException
+       *
+       * 该方法需要返回一个ModelAndView,用于封装异常信息，以及 视图的指定
+       *
+       * @param e 产生的异常会注入到e中
+       * @return
+       */
+      @ExceptionHandler(value = {java.lang.NullPointerException.class})
+      public ModelAndView nullPointerException(Exception e){
+  
+          ModelAndView modelAndView = new ModelAndView();
+          modelAndView.addObject("error",e.toString());
+          modelAndView.setViewName("errorNullpointer");
+          return modelAndView;
+      }
+  }
+  ~~~
+
+  
+
+* 1.4配置SimpleMappingExceptionResolver 处理异常
+
+  * 全局异常类中添加同一处理
+
+    ~~~java
+    @Configuration
+    public class GlobalException {
+        /**
+         * 返回值必须是 SimpleMappingExceptionResolver
+         * @return SimpleMappingExceptionResolver
+         */
+        @Bean
+        public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+            SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+            Properties mapping = new Properties();
+            /**
+             * 参数一，异常类型，全名称
+             * 参数二，异常匹配的视图
+             * 缺点：无法传递异常信息，仅仅做了异常与视图匹配
+             */
+            mapping.put("java.lang.ArithmeticException","errorArithmetic");
+            mapping.put("java.lang.NullPointerException","errorNullpointer");
+    
+            /**
+             * 设置异常与视图映射信息
+             */
+            resolver.setExceptionMappings(mapping);
+            return resolver;
+        }
+    }
+    ~~~
+
+    
+
+* 1.5自定义HandlerExceptionResolver类处理异常
+
+  * 全局异常类接口
+
+    ~~~java
+    @Configuration
+    public class GlobalException implements HandlerExceptionResolver {
+    
+        @Override
+        public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+            ModelAndView mv = new ModelAndView();
+            if (e instanceof ArithmeticException){
+                mv.setViewName("errorArithmetic");
+            }
+            if (e instanceof NullPointerException) {
+                mv.setViewName("errorNullpointer");
+            }
+            mv.addObject("error",e.toString());
+            return mv;
+        }
+    }
+    
+    ~~~
+
+
+## 2、springboot单元测试（junit）
+
+* 1 pom.xml
+
+  ~~~xml
+  	<dependencies>
+          <!-- springBoot 的启动器 -->
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-web</artifactId>
+          </dependency>
+          <!-- thymeleaf 的启动器 -->
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-thymeleaf</artifactId>
+          </dependency>
+          <!--junit-->
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-test</artifactId>
+          </dependency>
+      </dependencies>
+  ~~~
+
+* 2、创建测试业务
+
+  DAO,Service
+
+* 3、创建测试类
+
+  ~~~java
+  /**
+   * 文件描述
+   *
+   * @ProductName: Hundsun HEP
+   * @ProjectName: springboot-unitTest
+   * @Package: com.cyn.test
+   * @Description:
+   *
+   * springboot 测试类
+   *
+   * @RunWith(value = SpringJUnit4ClassRunner.class): 启动器
+   * SpringJUnit4ClassRunner 让junit和spring环境整合
+   *
+   * @SpringBootTest(classes = {App.class})
+   * 1.当前类为springBoot的测试类
+   * 2.加载springboot启动类，启动springboot
+   *
+   * junit整合spring,@ContextConfiguration("classpath:application.xml")
+   *
+   **/
+  @RunWith(value = SpringJUnit4ClassRunner.class)
+  @SpringBootTest(classes = {App.class})
+  public class UserServiceTest {
+      @Autowired
+      private UserServiceImpl userService;
+  
+      @Test
+      public void addUser(){
+          userService.addUser();
+      }
+  }
+  ~~~
+
+  
+
+# 三、SpringCloud微服务
+
+------
+
+## 1、单体架构
+
+单体系统或者是单体应用，把系统中所有的功能模块，耦合在一个应用中
+
+特点：打包成一个独立的单元（导成唯一的jar或者war），有一个单独的进程来运行
+
