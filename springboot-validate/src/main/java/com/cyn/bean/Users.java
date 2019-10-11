@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @date 2019/10/10 22:10
  */
 public class Users {
-    @NotBlank(message = "姓名不能为空")
+    @NotBlank(message = "姓名不能为空123")
     private String name;
     @NotBlank(message = "密码不能为空")
     private String password;

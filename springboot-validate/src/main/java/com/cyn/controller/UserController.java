@@ -30,6 +30,7 @@ public class UserController {
      */
     @RequestMapping("/{page}")
     public String showPage(@PathVariable String page,@ModelAttribute("userA") Users users){
+        System.out.println("helloaaqwe");
         return page;
     }
 
