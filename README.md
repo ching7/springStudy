@@ -77,16 +77,21 @@ spring中涉及的代理模式
 
 * springboot 整合MVC开发基础web页面demo
 
-## 10、springcloud-eureka | springcloud-rabbmitmq
+## 10、springcloud-eureka  | springcloud-eureka-ha-provider | springcloud-eureka-ha-consumer
 
-* springcloud整合eureka注册中心，分布式eureka注册中demo
+* springcloud-eureka 分布式eurek的demo
+* springcloud-eureka 的消费者提供者代码demo
+
+## 11、springcloud-rabbmitmq
+
+* 分布式eureka注册中demo
 * springcloud整合rabbmitmq的demo
 
-## 11、springmvc
+## 12、springmvc
 
 * 提供springMVC下的文件上传下载demo
 
-## 12、validCode
+## 13、validCode
 
 * spring结合mybatis 实现登录
 * 添加验证码生成模块
