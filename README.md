@@ -8,9 +8,11 @@
 
 * 提供java反射，反射获取注解的基础demo
 
-## 2、spring01-runtime
+## 2、spring-DI
 
-* spring运行环境搭建的demo
+* spring的依赖注入基础实现demo
+
+  通过BeanFactory注入实现
 
 ## 3、spring02-mybatis
 
