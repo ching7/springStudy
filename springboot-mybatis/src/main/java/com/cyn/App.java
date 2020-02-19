@@ -1,5 +1,6 @@
 package com.cyn;
 
+import org.junit.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,5 +26,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class,args);
+    }
+    @Test
+    public void hello(){
+        System.out.println("hello");
     }
 }

@@ -14,9 +14,13 @@
 
   通过BeanFactory注入实现
 
-## 3、spring02-mybatis
+## 3、springmvc-mybatis
 
 * spring整合mybatis的demo
+  * springmvc基础逻辑demo
+  * springmvc的mybatis的整合配置，mybatis的mysql配置
+  * mybatis的注解形式sql
+  * 简单的账号密码查询登陆，jsp跳转
 
 ## 4、spring03-aop
 
