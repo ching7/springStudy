@@ -1,4 +1,8 @@
-# 一、SpringDemo
+# springStudy
+
+https://img.shields.io/badge/JAVA-1.8+-green.svg
+
+https://img.shields.io/badge/springboot-green.svg
 
 ---
 
@@ -8,7 +12,7 @@
 
 ## 2、spring01-runtime
 
-* spring基础允许环境搭建的demo
+* spring运行环境搭建的demo
 
 ## 3、spring02-mybatis
 
@@ -22,39 +26,9 @@
 
 spring中涉及的代理模式
 
-- 什么是代理设计模式
-  1. 真实对象（总裁）
-  2. 代理对象（秘书）
-  3. 抽象对象或抽象功能（谈合作）
-- 代理设计模式优点
-  1. 保护真实对象
-  2. 让真实对象功能更明确
-  3. 增强拓展性
-- *静态代理* 设计模式（由代理对象代理真实对象的所有功能）
-  1. 自己编写代理类
-  2. 每个代理的功能需要单独编写(静态代理不足点)
+* ***JDK***提供的动态代理
 
-> 为了解决静态代理频繁编写代理方法的缺点
-
-1. ***JDK***提供的动态代理
-
-   ```
-   - 优点
-   	- jdk自带，无需导入jar
-   - 缺点
-   	- 真是对象必须实现接口 利用java反射机制效率不高
-   ```
-
-2. ***cglib***动态代理
-
-   ~~~java
-   - 优点
-     - 基于字节码文件，生成真实代理对象的子类
-     - 运行效率高于JDK动态代理
-     - 不需要实现接口
-   - 缺点
-     - 需要导入jar
-   ~~~
+* ***cglib***动态代理
 
 ## 6、springboot-admin | springboot-client | springboot-exception | springboot-fastbuild
 
