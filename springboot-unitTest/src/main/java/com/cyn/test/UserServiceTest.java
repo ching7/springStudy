@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 /**
  * 文件描述
  *
- * @ProductName: Hundsun HEP
  * @ProjectName: springboot-unitTest
  * @Package: com.cyn.test
  * @Description:
