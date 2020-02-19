@@ -23,14 +23,10 @@ import java.util.Properties;
  *
  * 通过SimpleMappingExceptionResolver 实现全局异常处理
  *
- * @Author: hspcadmin
  * @CreateDate: 2019/10/11 10:57
- * @UpdateUser: hspcadmin
- * @UpdateDate: 2019/10/11 10:57
  * @UpdateRemark: The modified content
  * @Version: 1.0
  * <p>
- * Copyright © 2019 Hundsun Technologies Inc. All Rights Reserved
  **/
 @Configuration
 public class GlobalException implements HandlerExceptionResolver {
