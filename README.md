@@ -2,75 +2,67 @@
 
 ![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)  ![springBoot](https://img.shields.io/badge/springboot-green.svg)
 
----
+## 1 spring-DI
 
-## 1 java-reflect
+* spring特性DI、依赖注入
+* 通过BeanFactory注入实现基础实现demo
 
-* 提供java反射，反射获取注解的基础demo
+## 2 spring-aop
 
-## 2 spring-DI
+* spring特性AOP、面写切面、
+* 面写切面的基础demo，前置、后置、环绕通知demo
 
-* spring的依赖注入基础实现demo
+## 3 springmvc-base
 
-  通过BeanFactory注入实现
+- springmvc配置文件配置，注解驱动、静态资源映射、视图解析器、文件上传解析器、异常处理解析器
+- springmvc常用注解RequestMapping、ResponseBody、RequestParam
+- Request请求跳转到视图层jsp的demo
+- springmvc进行文件上传下载的demo
 
-## 3 springmvc-mybatis
+## 4 springmvc-mybatis
 
-* spring整合mybatis的demo
-  * springmvc基础逻辑demo
-  * springmvc的mybatis的整合配置，mybatis的mysql配置
-  * mybatis的注解形式sql
-  * 简单的账号密码查询登陆，jsp跳转
+- spring整合mybatis的demo
+  - springmvc基础逻辑demo
+  - springmvc的mybatis的整合配置，mybatis的mysql配置
+  - mybatis的注解形式sql
+  - 简单的账号密码查询登陆，jsp跳转
 
-## 4 spring-aop
+## 5 springboot-servlet
 
-* spring特性AOP，面写切面的原理，
-* 面写切面的基础demo，通知demo
+- springboot整合基础servlet技术基础demo
+- springboot整合特殊的servlet技术filter、listener基础demo
+- springboot的controller进行文件上传的demo
+- springboot的启动的注册serlvet的demo
 
-## 5 spring04-proxy
+## 7 springboot-unTest
 
-spring中涉及的代理模式
+- springboot如何进行单元测试整合junit4
 
-* ***JDK***提供的动态代理
+## 7 springboot-exception 
 
-* ***cglib***动态代理
+* springboot处理请求时的异常处理demo
 
-## 6 springboot-admin | springboot-client | springboot-exception | springboot-fastbuild
+## 8 springboot-validate
 
-* 搭建基础的springboot运行demo，模拟微服务admin\client
-* springboot的异常处理demo
-* 在spring.io官网快速构建springboot项目
+* springboot注解校验Bean数据合法性
+  * @Valid、@ModelAttribute
 
-## 7 springboot-mybatis | springboot-unTest | springboot-validate
+* 校验异常，视图跳转@PathVariable
 
-* springboot整合mybatis的demo
-* springboot服务端校验数据demo
-* springboot单元测试demo
-
-## 8 springboot-view-freemarker | springboot-view-jsp
+## 9 springboot-view
 
 * springboot整合freemarker视图层技术demo
 * springboot整合freemarker视图层技术jsp
 
-## 9 springboot
+## 10 springcloud-eureka
 
-* springboot 整合MVC开发基础web页面demo
-
-## 10 springcloud-eureka  | springcloud-eureka-ha-provider | springcloud-eureka-ha-consumer
-
-* springcloud-eureka 分布式eurek的demo
-* springcloud-eureka 的消费者提供者代码demo
+* springcloud-eureka 注册中心demo
+* springcloud-eureka-ha 分布式注册中心demo
+* springcloud-eureka-ha-provider、springcloud-eureka-ha-consumer消费者提供者注册，以及调用代码基础demo
 
 ## 11 springcloud-rabbmitmq
 
-* 分布式eureka注册中demo
-* springcloud整合rabbmitmq的demo
-
-## 12 springmvc
-
-* 提供springMVC下的文件上传下载demo
-
-## 13 validCode
-
-* spring结合mybatis 实现登录
-* 添加验证码生成模块
+* springcloud-rabbmitmq 消息队列基础，创建队列，发送与接受消息
+* springcloud-rabbmitmq-direct 消息交换模式
+* springcloud-rabbmitmq-fanout 消息交换模式
+* springcloud-rabbitmq-topic 消息交换模式
