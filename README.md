@@ -1,8 +1,6 @@
 # springStudy
 
-https://img.shields.io/badge/JAVA-1.8+-green.svg
-
-https://img.shields.io/badge/springboot-green.svg
+`<img src="https://img.shields.io/badge/JAVA-1.8+-green.svg" />` `<img src="https://img.shields.io/badge/springboot-green.svg" />` 
 
 ---
 
