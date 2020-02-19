@@ -1,6 +1,6 @@
 # springStudy
 
-`<img src="https://img.shields.io/badge/JAVA-1.8+-green.svg" />` `<img src="https://img.shields.io/badge/springboot-green.svg" />` 
+![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)  ![springBoot](https://img.shields.io/badge/springboot-green.svg)
 
 ---
 
