@@ -1,6 +1,6 @@
 # springStudy
 
-![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)  ![springBoot](https://img.shields.io/badge/springboot-green.svg)
+[![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)](https://github.com/ching7/springStudy)  [![springBoot](https://img.shields.io/badge/apache-springboot-green.svg)](https://github.com/ching7/springStudy)
 
 ## 1 spring-DI
 
