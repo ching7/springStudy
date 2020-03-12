@@ -2,6 +2,36 @@
 
 [![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)](#springcloud-eureka)  [![springBoot](https://img.shields.io/badge/apache-springboot-green.svg)](#springcloud-rabbmitmq)
 
+spring基础知识学习
+
+~~~lua
+springStudy
+├── spring-aop --spring基础特性：切面编程
+├── spring-DI --spring基础特性：依赖注入
+├── springboot-exception --springboot基础：异常处理
+├── springboot-mybatis --springboot整合mybatis
+├── springboot-servlet --springboot整合servlet **重要
+├── springboot-unitTest --springboot基础：单元测试
+├── springboot-validate --springboot基础：出入参合法性
+├── springboot-view-freemarker --springboot整合视图层技术freemarker
+├── springboot-view-jsp --springboot整合视图层技术jsp
+├── springcloud-eureka --springcloud组件eureka注册中心，服务注册发现
+├── springcloud-eureka-ha --注册中心
+├── springcloud-eureka-ha-consumer --服务生产者
+├── springcloud-eureka-ha-provider --服务消费者
+├── springcloud-rabbitmq-direct-consumer --springcloud组件rabbitmq消息队列
+├── springcloud-rabbitmq-direct-provider
+├── springcloud-rabbitmq-fanout-consumer
+├── springcloud-rabbitmq-fanout-provider
+├── springcloud-rabbitmq-topic-consumer
+├── springcloud-rabbitmq-topic-provider
+├── springcloud-rabbmitmq
+├── springmvc-base --springmvc基础各类解析器，常用注解
+├── springmvc-mybatis --springmvc整合mybatis
+~~~
+
+
+
 ## spring-DI
 
 * spring特性DI、依赖注入
