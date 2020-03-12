@@ -1,18 +1,15 @@
-package com.cyn;
+package com.cyn.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-/**
- * @author chenyn
- * @version 1.0
- * @date 2019/10/22 23:11
- */
 @EnableEurekaServer
 @SpringBootApplication
-public class Application {
+public class EurekaServerApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(EurekaServerApplication.class, args);
     }
+
 }
