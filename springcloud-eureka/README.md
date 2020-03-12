@@ -6,7 +6,7 @@
 springcloud-eureka
 ├── eureka-client --注册服务
 ├── eureka-server --服务注册中心
-└── src
+└── eureka-security-server --服务注册中心添加简单认证
 ~~~
 
 * idea启动springboot使用同的配置文件
