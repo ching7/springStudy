@@ -1,6 +1,5 @@
 package com.cyn.cloud.controller;
 
-import com.cyn.cloud.api.CommonResult;
 import com.cyn.cloud.bean.User;
 import com.cyn.cloud.service.UserService;
 import org.slf4j.Logger;
@@ -35,8 +34,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUser(@PathVariable Long id) {
+    public String getUser(@PathVariable Long id) throws InterruptedException {
         User user = userService.getUser(id);
+        Thread.sleep(3000);
         LOGGER.info("根据id获取用户信息，用户名称为：{}", user.getUsername());
         return "根据id获取用户信息，用户名称为：{}";
     }

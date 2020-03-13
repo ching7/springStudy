@@ -1,7 +1,5 @@
 # springcloud
 
-`springcloud`：
-
 Spring Cloud 为最常见的分布式系统模式提供了一种简单且易于接受的编程模型，帮助开发人员构建有弹性的、可靠的、协调的应用程序。Spring Cloud 构建于 Spring Boot 之上，使得开发者很容易入手并快速应用于生产中。
 
 Spring Cloud为开发人员提供了快速构建分布式系统架构的工具，例如配置管理，服务发现，断路器，智能路由，微代理，控制总线，一次性令牌，全局锁定，领导选举，分布式会话，集群状态等。
@@ -71,9 +69,9 @@ springcloud
 
 * 微服务间的调用策略
 
-微服务之间的调用是使用的 `RestTemplate`，`RestTemplate`是`Spring`提供的一个访问Http服务的客户端类
+  微服务之间的调用是使用的 `RestTemplate`，`RestTemplate`是`Spring`提供的一个访问Http服务的客户端类
 
-[深入了解RestTemplate](https://my.oschina.net/sdlvzg/blog/1800395)
+  [深入了解RestTemplate](https://my.oschina.net/sdlvzg/blog/1800395)
 
 * `Ribbon`是什么 ？能干什么？怎么用？
 
@@ -87,12 +85,80 @@ springcloud
 
   这时候需要一个均衡器，在进行服务调用时，进行负载均衡算法，对微服务集群进行调用，避免大量请求集中到一台机器上。
 
+  `Ribbon`保证的就是当前服务使用`RestTemplate`方式调用其他微服务前，使用负载均衡，减少请求峰值
+
 * `Nginx` 和 `Ribbon` 的对比
 
   * `Nignx` 接收了所有的请求进行负载均衡的，是一种**集中式**的负载均衡器。
   * `Ribbon` 是在消费者端进行的负载均衡
 
   `Nginx` 使用的是 轮询和加权轮询算法。而在 `Ribbon` 中有更多的负载均衡调度算法，其默认是使用的 `RoundRobinRule` 轮询策略
+
+## 服务容错保护：Hystrix
+
+~~~lua
+springcloud
+├── eureka-server --服务注册中心
+├── hystrix-service --模拟服务容错情况
+└── user-service --模拟用户服务
+~~~
+
+微服务架构中，服务与服务之间通过远程调用的方式进行通信，一旦某个被调用的服务发生了故障，其依赖服务也会发生故障，此时就会发生故障的蔓延，最终导致系统瘫痪，也被称为`服务雪崩`。
+
+* `Ribbon`是什么 ？能干什么？怎么用？
+
+  * 是什么
+
+    `Hystrix`实现了断路器模式，当某个服务发生故障时，通过断路器的监控，给调用方返回一个错误响应，而不是长时间的等待，这样就不会使得调用方由于长时间得不到响应而占用线程，从而防止故障的蔓延。
+
+  * 能干什么
+
+    `Hystrix`具备服务降级、服务熔断、线程隔离、请求缓存、请求合并及服务监控等强大功能
+
+* `Hystrix`使用注意点
+
+  ~~~java
+  @RestController
+  @RequestMapping("/userhy")
+  public class UserHystrixController {
+      @Autowired
+      private RestTemplate restTemplate;
+      @Value("${service-url.user-service}")
+      private String userServiceUrl;
+  
+      @HystrixCommand(fallbackMethod = "getDefaultUser", 
+                      ignoreExceptions = {NullPointerException.class},
+                      commandProperties = {@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2200")})
+      @GetMapping("/testCommand/{id}")
+      public String testCommand(@PathVariable Long id) {
+          if (id == 1) {
+          throw new IndexOutOfBoundsException();
+          } else if (id == 2) {
+              throw new NullPointerException();
+          }
+          return restTemplate.getForObject(userServiceUrl + "/user/{1}", String.class, id);
+      }
+  	/**
+       * 服务降级方法
+       * @param id
+       * @return
+       */	
+      public String getDefaultUser(@PathVariable Long id) {
+          User defaultUser = new User(-1, "defaultUser", "123456");
+          return defaultUser.toString();
+      }
+  }
+  ~~~
+
+  * 需要进行容错保护的接口加`@HystrixCommand`注解
+
+    `@HystrixCommand`的常用参数：
+
+    * fallbackMethod：指定服务降级处理方法；
+    * ignoreExceptions：忽略某些异常，不发生服务降级。上面的代码，假设用户服务不可用，在发生空指针异常时，会直接抛出异常，在发生其他异常时，会进入降级处理方法
+    * commandProperties：服务熔断设置。上面代码设置服务调用超时时间为2200ms，超时自动熔断，进入降级方法
+
+  * `Hystrix`还有线程隔离、请求缓存、请求合并及服务监控等强大功能，这里仅介绍了熔断和降级的常用功能
 
 > 参考资料：
 >
