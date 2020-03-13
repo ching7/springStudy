@@ -1,6 +1,6 @@
 # springStudy
 
-[![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)](#springcloud-eureka)  [![springBoot](https://img.shields.io/badge/apache-springboot-green.svg)](#springcloud-rabbmitmq)
+[![java](https://img.shields.io/badge/JAVA-1.8+-green.svg)](#springcloud-eureka)  [![spring](https://img.shields.io/badge/apache-spring-green.svg)](#springcloud) [![springBoot](https://img.shields.io/badge/apache-springboot-green.svg)](#springcloud) [![springcloud](https://img.shields.io/badge/apache-springcloud-green.svg)]((#springcloud))
 
 spring基础知识学习
 
