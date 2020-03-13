@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @Date 2020/3/12 17:00
  * @Author: chenyn22577
  * @Version: 1.0
- * @Description: note
+ * @Description: 注册中心安全认证配置
  **/
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
