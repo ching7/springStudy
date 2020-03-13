@@ -15,10 +15,10 @@ springStudy
 ├── springboot-validate --springboot基础：出入参合法性
 ├── springboot-view-freemarker --springboot整合视图层技术freemarker
 ├── springboot-view-jsp --springboot整合视图层技术jsp
-├── springcloud-eureka --springcloud组件eureka注册中心，服务注册发现
+├── springcloud-cloud --springcloud组件简介
 ├── springcloud-eureka-ha --注册中心
-├── springcloud-eureka-ha-consumer --服务生产者
-├── springcloud-eureka-ha-provider --服务消费者
+├── springcloud-eureka-ha-consumer --服务生产者调用demo
+├── springcloud-eureka-ha-provider --服务消费者调用demo
 ├── springcloud-rabbitmq-direct-consumer --springcloud组件rabbitmq消息队列
 ├── springcloud-rabbitmq-direct-provider
 ├── springcloud-rabbitmq-fanout-consumer
@@ -84,9 +84,12 @@ springStudy
 * springboot整合freemarker视图层技术demo
 * springboot整合freemarker视图层技术jsp
 
+## springcloud-cloud
+
+* springcloud框架组件介绍
+
 ## springcloud-eureka
 
-* springcloud-eureka 注册中心demo
 * springcloud-eureka-ha 分布式注册中心demo
 * springcloud-eureka-ha-provider、springcloud-eureka-ha-consumer消费者提供者注册，以及调用代码基础demo
 
