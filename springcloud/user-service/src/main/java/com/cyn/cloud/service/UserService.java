@@ -15,15 +15,15 @@ import java.util.List;
  * @Description: 用户服务接口
  **/
 public interface UserService {
-    void create(User user);
+    String create(User user);
 
-    User getUser(Long id);
+    String getUser(Long id);
 
-    List<User> getUserByIds(List<Long> ids);
+    String getUserByIds(List<Long> ids);
 
-    User getByUsername(String username);
+    String getByUsername(String username);
 
-    void update(User user);
+    String update(User user);
 
-    void delete(Long id);
+    String delete(Long id);
 }

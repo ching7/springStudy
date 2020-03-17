@@ -20,34 +20,39 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Override
-    public void create(User user) {
-
+    public String create(User user) {
+        User u = new User(1,"新增","test");
+        return u.toString();
     }
 
     @Override
-    public User getUser(Long id) {
-        return new User(1,"test","test");
+    public String getUser(Long id) {
+        User u = new User(1,"获取","test");
+        return u.toString();
     }
 
     @Override
-    public List<User> getUserByIds(List<Long> ids) {
+    public String getUserByIds(List<Long> ids) {
         List<User> list = new ArrayList<>();
         list.add(new User(1,"test","test"));
-        return list;
+        return list.toString();
     }
 
     @Override
-    public User getByUsername(String username) {
-        return new User(1,"test","test");
+    public String getByUsername(String username) {
+        User u = new User(1,"getByUsername","test");
+        return u.toString();
     }
 
     @Override
-    public void update(User user) {
-
+    public String update(User user) {
+        User u = new User(1,"修改","test");
+        return u.toString();
     }
 
     @Override
-    public void delete(Long id) {
-
+    public String delete(Long id) {
+        User u = new User(1,"删除","test");
+        return u.toString();
     }
 }

@@ -159,9 +159,137 @@ springcloud
     * commandProperties：服务熔断设置。上面代码设置服务调用超时时间为2200ms，超时自动熔断，进入降级方法
 
   * `Hystrix`还有线程隔离、请求缓存、请求合并及服务监控等强大功能，这里仅介绍了熔断和降级的常用功能
+  
+  * 
+  
+  ## 基于Ribbon和Hystrix的声明式服务调用：OpenFeign
+  
+  `Feign`是声明式的服务调用工具，我们只需创建一个接口并用注解的方式来配置它，就可以实现对某个服务接口的调用，简化了直接使用RestTemplate来调用服务接口的开发量。
+  
+  `Feign`具备可插拔的注解支持，同时支持`Feign`注解、JAX-RS注解及SpringMvc注解。当使用`Feign`时，Spring Cloud集成了Ribbon和Eureka以提供负载均衡的服务调用及基于Hystrix的服务容错保护功能。
+  
+  ~~~lua
+  springcloud
+  ├── eureka-server --服务注册中心
+  ├── feign-service --声明式服务调用、容错 
+  └── user-service  --测试用户服务
+  ~~~
+  
+  
+  
+  * 只需要编写远程调用服务的接口，不需要实现。
+  
+  ~~~java
+  @FeignClient(value = "user-service")
+  public interface UserService {
+      @PostMapping("/user/create")
+      String create(@RequestBody User user);
+  
+      @GetMapping("/user/{id}")
+      String getUser(@PathVariable Long id);
+  
+      @GetMapping("/user/getByUsername")
+      String getByUsername(@RequestParam String username);
+  
+      @PostMapping("/user/update")
+      String update(@RequestBody User user);
+  
+      @PostMapping("/user/delete/{id}")
+      String delete(@PathVariable Long id);
+  }
+  ~~~
+  
+  `@FeignClient`注解的value值，填写远程调用的服务名称，接口对应远程服务接口
+  
+  * `Ribbon`负载均衡：如果远程服务有多个，自动默认参数实现负载均衡
+  
+  ~~~properties
+  #注意调整超时时间
+  # feign http远程调用超时时间设置
+  feign.httpclient.connection-timeout=60000
+  ~~~
+  
+  
+  
+  * `Hystrix`容错保护：
+  
+  ~~~java
+  // 添加UserFallbackService 实现UserService接口，并且对接口中的每个实现方法进行了服务降级逻辑的实现
+  // 需要在配置中启用hytrix容错 
+  // 是否启动用hystrix容错保护
+  // feign.hystrix.enabled=true
+  @Component
+  public class UserFallbackService implements UserService {
+      @Override
+      public CommonResult create(User user) {
+          User defaultUser = new User(-1L, "defaultUser", "123456");
+          return new CommonResult<>(defaultUser);
+      }
+  
+      @Override
+      public CommonResult<User> getUser(Long id) {
+          User defaultUser = new User(-1L, "defaultUser", "123456");
+          return new CommonResult<>(defaultUser);
+      }
+  
+      @Override
+      public CommonResult<User> getByUsername(String username) {
+          User defaultUser = new User(-1L, "defaultUser", "123456");
+          return new CommonResult<>(defaultUser);
+      }
+  
+      @Override
+      public CommonResult update(User user) {
+          return new CommonResult("调用失败，服务被降级",500);
+      }
+  
+      @Override
+      public CommonResult delete(Long id) {
+          return new CommonResult("调用失败，服务被降级",500);
+      }
+  }
+  ~~~
+  
+  * 在`Feign`中配置`Ribbon`、`Hystrix`可以直接使用其原有的配置
+  
+  * `Feign`日志服务
+  
+    通过java配置来使Feign打印最详细的Http请求日志信息。
+  
+  ~~~java
+  // 1
+  /**
+  日志级别
+  NONE：默认的，不显示任何日志；
+  BASIC：仅记录请求方法、URL、响应状态码及执行时间；
+  HEADERS：除了BASIC中定义的信息之外，还有请求和响应的头信息；
+  FULL：除了HEADERS中定义的信息之外，还有请求和响应的正文及元数据。
+  **/
+  @Configuration
+  public class FeignConfig {
+      @Bean
+      Logger.Level feignLoggerLevel() {
+          return Logger.Level.FULL;
+      }
+  }
+  
+  // 2
+  // 配置文件新增，指定日志输出的目录
+  // logging.level.com.cyn.cloud.service=debug
+  
+  //以上两步配置Feign日志输出
+  ~~~
+  
+  
+  
+  ## API网关服务：Zuul
+  
+  API网关为微服务架构中的服务提供了统一的访问入口，所有客户端的访问都通过它来进行路由及过滤。它实现了请求路由、负载均衡、校验过滤、服务容错、服务聚合等功能。
+  
+  
+  
+  参考资料：
 
-> 参考资料：
->
 > 1.https://juejin.im/post/5de2553e5188256e885f4fa3
 >
 > 2.http://www.macrozheng.com/#/cloud/ribbon

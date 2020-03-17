@@ -29,29 +29,25 @@ public class UserController {
 
     @PostMapping("/create")
     public String create(@RequestBody User user) {
-        userService.create(user);
-        return "操作成功";
+        return userService.create(user);
     }
 
     @GetMapping("/{id}")
     public String getUser(@PathVariable Long id) throws InterruptedException {
-        User user = userService.getUser(id);
-        Thread.sleep(3000);
-        LOGGER.info("根据id获取用户信息，用户名称为：{}", user.getUsername());
-        return "根据id获取用户信息，用户名称为：{}";
+        //Thread.sleep(3000);
+        LOGGER.info("根据id获取用户信息，用户名称为：{}", id);
+        return userService.getUser(id);
     }
 
     @GetMapping("/getUserByIds")
     public String getUserByIds(@RequestParam List<Long> ids) {
-        List<User> userList = userService.getUserByIds(ids);
-        LOGGER.info("根据ids获取用户信息，用户列表为：{}", userList);
-        return "根据ids获取用户信息，用户列表为：{}" + userList.toString();
+        LOGGER.info("根据ids获取用户信息，用户列表为：{}", ids);
+        return userService.getUserByIds(ids);
     }
 
     @GetMapping("/getByUsername")
     public String getByUsername(@RequestParam String username) {
-        User user = userService.getByUsername(username);
-        return "根据username获取用户信息，用户为：{}" + user.toString();
+        return userService.getByUsername(username);
     }
 
     @PostMapping("/update")
@@ -62,7 +58,6 @@ public class UserController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        userService.delete(id);
-        return "delete操作成功";
+        return userService.delete(id);
     }
 }
