@@ -160,135 +160,210 @@ springcloud
 
   * `Hystrix`还有线程隔离、请求缓存、请求合并及服务监控等强大功能，这里仅介绍了熔断和降级的常用功能
   
-  * 
-  
-  ## 基于Ribbon和Hystrix的声明式服务调用：OpenFeign
-  
-  `Feign`是声明式的服务调用工具，我们只需创建一个接口并用注解的方式来配置它，就可以实现对某个服务接口的调用，简化了直接使用RestTemplate来调用服务接口的开发量。
-  
-  `Feign`具备可插拔的注解支持，同时支持`Feign`注解、JAX-RS注解及SpringMvc注解。当使用`Feign`时，Spring Cloud集成了Ribbon和Eureka以提供负载均衡的服务调用及基于Hystrix的服务容错保护功能。
-  
-  ~~~lua
-  springcloud
-  ├── eureka-server --服务注册中心
-  ├── feign-service --声明式服务调用、容错 
-  └── user-service  --测试用户服务
-  ~~~
-  
-  
-  
-  * 只需要编写远程调用服务的接口，不需要实现。
-  
-  ~~~java
-  @FeignClient(value = "user-service")
-  public interface UserService {
-      @PostMapping("/user/create")
-      String create(@RequestBody User user);
-  
-      @GetMapping("/user/{id}")
-      String getUser(@PathVariable Long id);
-  
-      @GetMapping("/user/getByUsername")
-      String getByUsername(@RequestParam String username);
-  
-      @PostMapping("/user/update")
-      String update(@RequestBody User user);
-  
-      @PostMapping("/user/delete/{id}")
-      String delete(@PathVariable Long id);
-  }
-  ~~~
-  
-  `@FeignClient`注解的value值，填写远程调用的服务名称，接口对应远程服务接口
-  
-  * `Ribbon`负载均衡：如果远程服务有多个，自动默认参数实现负载均衡
-  
-  ~~~properties
-  #注意调整超时时间
-  # feign http远程调用超时时间设置
-  feign.httpclient.connection-timeout=60000
-  ~~~
-  
-  
-  
-  * `Hystrix`容错保护：
-  
-  ~~~java
-  // 添加UserFallbackService 实现UserService接口，并且对接口中的每个实现方法进行了服务降级逻辑的实现
-  // 需要在配置中启用hytrix容错 
-  // 是否启动用hystrix容错保护
-  // feign.hystrix.enabled=true
-  @Component
-  public class UserFallbackService implements UserService {
-      @Override
-      public CommonResult create(User user) {
-          User defaultUser = new User(-1L, "defaultUser", "123456");
-          return new CommonResult<>(defaultUser);
-      }
-  
-      @Override
-      public CommonResult<User> getUser(Long id) {
-          User defaultUser = new User(-1L, "defaultUser", "123456");
-          return new CommonResult<>(defaultUser);
-      }
-  
-      @Override
-      public CommonResult<User> getByUsername(String username) {
-          User defaultUser = new User(-1L, "defaultUser", "123456");
-          return new CommonResult<>(defaultUser);
-      }
-  
-      @Override
-      public CommonResult update(User user) {
-          return new CommonResult("调用失败，服务被降级",500);
-      }
-  
-      @Override
-      public CommonResult delete(Long id) {
-          return new CommonResult("调用失败，服务被降级",500);
-      }
-  }
-  ~~~
-  
-  * 在`Feign`中配置`Ribbon`、`Hystrix`可以直接使用其原有的配置
-  
-  * `Feign`日志服务
-  
-    通过java配置来使Feign打印最详细的Http请求日志信息。
-  
-  ~~~java
-  // 1
-  /**
-  日志级别
-  NONE：默认的，不显示任何日志；
-  BASIC：仅记录请求方法、URL、响应状态码及执行时间；
-  HEADERS：除了BASIC中定义的信息之外，还有请求和响应的头信息；
-  FULL：除了HEADERS中定义的信息之外，还有请求和响应的正文及元数据。
-  **/
-  @Configuration
-  public class FeignConfig {
-      @Bean
-      Logger.Level feignLoggerLevel() {
-          return Logger.Level.FULL;
-      }
-  }
-  
-  // 2
-  // 配置文件新增，指定日志输出的目录
-  // logging.level.com.cyn.cloud.service=debug
-  
-  //以上两步配置Feign日志输出
-  ~~~
-  
-  
-  
-  ## API网关服务：Zuul
-  
-  API网关为微服务架构中的服务提供了统一的访问入口，所有客户端的访问都通过它来进行路由及过滤。它实现了请求路由、负载均衡、校验过滤、服务容错、服务聚合等功能。
-  
-  
-  
-  参考资料：
+
+## 基于Ribbon和Hystrix的声明式服务调用：OpenFeign
+
+```lua
+springcloud
+├── eureka-server --服务注册中心
+├── feign-service --声明式服务调用、容错 
+└── user-service  --测试用户服务
+```
+
+`Feign`是声明式的服务调用工具，我们只需创建一个接口并用注解的方式来配置它，就可以实现对某个服务接口的调用，简化了直接使用RestTemplate来调用服务接口的开发量。
+
+`Feign`具备可插拔的注解支持，同时支持`Feign`注解、JAX-RS注解及SpringMvc注解。当使用`Feign`时，Spring Cloud集成了Ribbon和Eureka以提供负载均衡的服务调用及基于Hystrix的服务容错保护功能。
+
+- 只需要编写远程调用服务的接口，不需要实现。
+
+```java
+@FeignClient(value = "user-service")
+public interface UserService {
+    @PostMapping("/user/create")
+    String create(@RequestBody User user);
+
+    @GetMapping("/user/{id}")
+    String getUser(@PathVariable Long id);
+
+    @GetMapping("/user/getByUsername")
+    String getByUsername(@RequestParam String username);
+
+    @PostMapping("/user/update")
+    String update(@RequestBody User user);
+
+    @PostMapping("/user/delete/{id}")
+    String delete(@PathVariable Long id);
+}
+```
+
+`@FeignClient`注解的value值，填写远程调用的服务名称，接口对应远程服务接口
+
+- `Ribbon`负载均衡：如果远程服务有多个，自动默认参数实现负载均衡
+
+```properties
+#注意调整超时时间
+# feign http远程调用超时时间设置
+feign.httpclient.connection-timeout=60000
+```
+
+- `Hystrix`容错保护：
+
+```java
+// 添加UserFallbackService 实现UserService接口，并且对接口中的每个实现方法进行了服务降级逻辑的实现
+// 需要在配置中启用hytrix容错 
+// 是否启动用hystrix容错保护
+// feign.hystrix.enabled=true
+@Component
+public class UserFallbackService implements UserService {
+    @Override
+    public CommonResult create(User user) {
+        User defaultUser = new User(-1L, "defaultUser", "123456");
+        return new CommonResult<>(defaultUser);
+    }
+
+    @Override
+    public CommonResult<User> getUser(Long id) {
+        User defaultUser = new User(-1L, "defaultUser", "123456");
+        return new CommonResult<>(defaultUser);
+    }
+
+    @Override
+    public CommonResult<User> getByUsername(String username) {
+        User defaultUser = new User(-1L, "defaultUser", "123456");
+        return new CommonResult<>(defaultUser);
+    }
+
+    @Override
+    public CommonResult update(User user) {
+        return new CommonResult("调用失败，服务被降级",500);
+    }
+
+    @Override
+    public CommonResult delete(Long id) {
+        return new CommonResult("调用失败，服务被降级",500);
+    }
+}
+```
+
+- 在`Feign`中配置`Ribbon`、`Hystrix`可以直接使用其原有的配置
+
+- `Feign`日志服务
+
+  通过java配置来使Feign打印最详细的Http请求日志信息。
+
+```java
+// 1
+/**
+日志级别
+NONE：默认的，不显示任何日志；
+BASIC：仅记录请求方法、URL、响应状态码及执行时间；
+HEADERS：除了BASIC中定义的信息之外，还有请求和响应的头信息；
+FULL：除了HEADERS中定义的信息之外，还有请求和响应的正文及元数据。
+**/
+@Configuration
+public class FeignConfig {
+    @Bean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
+    }
+}
+
+// 2
+// 配置文件新增，指定日志输出的目录
+// logging.level.com.cyn.cloud.service=debug
+
+//以上两步配置Feign日志输出
+```
+
+
+
+## API网关服务：Zuul
+
+~~~lua
+springcloud
+├── eureka-server --注册中心
+├── feign-service --测试feign服务
+├── user-service  --测试用户服务
+└── zuul-service  --测试zuul服务
+~~~
+
+API网关为微服务架构中的服务提供了统一的访问入口，所有客户端的访问都通过它来进行路由及过滤。它实现了请求路由、负载均衡、校验过滤、服务容错、服务聚合等功能。
+
+路由与过滤是Zuul的两大核心功能，路由功能负责将外部请求转发到具体的服务实例上去，是实现统一访问入口的基础，过滤功能负责对请求过程进行额外的处理，是请求校验过滤及服务聚合的基础。
+
+**Zuul路由功能：**
+
+* 注意配置zuul的超时时间
+
+~~~properties
+# 调整zuul连接超时时间，否则在debug会出错
+zuul.host.connect-timeout-millis=60000
+zuul.host.socket-timeout-millis=60000
+zuul.host.max-per-route-connections=10000
+# zuul路由配置
+zuul.routes.user-service.path=/user-service/**
+zuul.routes.feign-service.path=/feign-service/**
+# 关闭默认路由
+zuul.ignored-services=*
+~~~
+
+* 配置路由
+
+~~~properties
+# 访问http://localhost:8801/user-service/user/1同样可以路由到了user-service上了；
+
+# 访问http://localhost:8801/feign-service/user/1同样可以路由到了feign-service上了。
+~~~
+
+* 默认路由关闭
+
+~~~properties
+# 假设你的注册服务中心有三个已经注册的服务名称A，B，C
+# 但是你在zuul网管服务器中的只隐射了A和B，如下
+zuul.routes.a.path=/a/**
+zuul.routes.b.path=/b/**
+#  因为zuul有默认的隐射机制，如果没有以下的配置，那么访问http://ip:port/c/也可以访问到你的c服务，如果你不想向外界暴露除你配置的隐射之外的服务，可以加上zuul.ignored-services=*
+zuul.ignored-services=*
+
+#路由默认过滤设置
+
+#Zuul在请求路由时，默认会过滤掉一些敏感的头信息，以下配置可以防止路由时的Cookie及Authorization的丢失：
+#配置过滤敏感的请求头信息，设置为空就不会过滤
+zuul.sensitive-headers=Cookie,Set-Cookie,Authorization
+#Zuul在请求路由时，不会设置最初的host头信息，以下配置可以解决：
+#设置为true重定向是会添加host请求头
+zuul.add-host-header=true
+~~~
+
+* 查看路由信息
+
+注意依赖pom的添加，以及配置文件开启路由端点
+
+~~~properties
+# 开启查看路由的端点
+management.endpoints.web.exposure.include='routes'
+~~~
+
+**Zuul过滤功能：**
+
+Zuul中有以下几种典型的过滤器类型。
+
+- pre：在请求被路由到目标服务前执行，比如权限校验、打印日志等功能；
+- routing：在请求被路由到目标服务时执行，这是使用Apache HttpClient或Netflix Ribbon构建和发送原始HTTP请求的地方；
+- post：在请求被路由到目标服务后执行，比如给目标服务的响应添加头信息，收集统计数据等功能；
+- error：请求在其他阶段发生错误时执行。
+
+下图描述了一个HTTP请求到达API网关后，如何在各种不同类型的过滤器中流转的过程。
+
+![](../document/image/zuul-filter.jpg)
+
+* 自定义过滤器
+
+注意新增的过滤器是否被框架管理
+
+**注：**由于Zuul自动集成了Ribbon和Hystrix，所以Zuul天生就有负载均衡和服务容错能力，我们可以通过Ribbon和Hystrix的配置来配置Zuul中的相应功能
+
+参考资料：
 
 > 1.https://juejin.im/post/5de2553e5188256e885f4fa3
 >
