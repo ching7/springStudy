@@ -405,6 +405,15 @@ Zuul中有以下几种典型的过滤器类型。
 
 * 获取子目录配置
 
+  ```properties
+  ##配置存储配置信息的Git仓库
+  spring.cloud.config.server.git.uri=https://github.com/ching7/springcloud-config.git
+  spring.cloud.config.server.git.username=ching7spring.cloud.config.server.git.password=123456
+  spring.cloud.config.server.git.search-paths=${spring.application.name}
+  ```
+
+  注意`spring.application.name`是配置文件仓库的放置配置文件目录，一般和服务名称一样
+
 * 刷新配置
 
 `配置中心添加安全认证：`
