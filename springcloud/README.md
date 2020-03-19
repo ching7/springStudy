@@ -363,6 +363,54 @@ Zuul中有以下几种典型的过滤器类型。
 
 **注：**由于Zuul自动集成了Ribbon和Hystrix，所以Zuul天生就有负载均衡和服务容错能力，我们可以通过Ribbon和Hystrix的配置来配置Zuul中的相应功能
 
+## 外部集中化配置管理：Config
+
+`Spring Cloud Config `分为服务端和客户端两个部分。服务端被称为分布式配置中心，它是个独立的应用，可以从配置仓库获取配置信息并提供给客户端使用。客户端可以通过配置中心来获取配置信息，在启动时加载配置。
+
+`Spring Cloud Config` 的配置中心默认采用Git来存储配置信息，所以天然就支持配置信息的版本管理，并且可以使用Git客户端来方便地管理和访问配置信息。
+
+`Config-server:`
+
+* 新增config-server模块，调整pom文件，添加`spring-cloud-config-server`、`spring-cloud-starter-netflix-eureka-client`依赖
+* 配置`application.properties`、调整启动类增加注解
+
+* 获取配置文件信息的访问格式
+
+  ~~~properties
+  # 获取配置信息
+  /{label}/{application}-{profile}
+  # 获取配置文件信息
+  /{label}/{application}-{profile}.properties
+  
+  # 占位符相关解释
+  application：代表应用名称，默认为配置文件中的spring.application.name，如果配置了spring.cloud.config.name，则为该名称；
+  label：代表分支名称，对应配置文件中的spring.cloud.config.label；
+  profile：代表环境名称，对应配置文件中的spring.cloud.config.profile。
+  ~~~
+
+* 访问URL、获取配置
+
+  - 访问http://localhost:8901/master/config-dev来获取master分支上dev环境的配置信息；
+  - 访问http://localhost:8901/master/config-dev.properties来获取master分支上dev环境的配置文件信息，对比上面信息，可以看出配置信息和配置文件信息并不是同一个概念；
+
+`Config-client:`
+
+* 新增模块，添加依赖，配置文件修改，新增controller
+
+* 服务启动报错
+
+  可能很不幸，Client服务启不来，提示：**Fetching config from server at: http://localhost:8888**
+  其实这是一个配置文件优先级的问题；SpringCloud里面有个“启动上下文”，主要是用于加载远端的配置，也就是加载ConfigServer里面的配置,默认加载顺序为：加载bootstrap.*里面的配置 --> 链接configserver，加载远程配置 --> 加载application.*里面的配置；总结：这里需要借助于“启动上下文”来处理加载远程配置。
+  即把`application`改为`bootstrap`即可。
+
+* 获取子目录配置
+
+* 刷新配置
+
+`配置中心添加安全认证：`
+
+`config-server集群：`
+
 参考资料：
 
 > 1.https://juejin.im/post/5de2553e5188256e885f4fa3
