@@ -424,6 +424,8 @@ Zuul中有以下几种典型的过滤器类型。
 
 `配置中心添加安全认证：`
 
+* 增加模块`config-security-server`，添加依赖
+
 `config-server集群：`
 
 参考资料：
