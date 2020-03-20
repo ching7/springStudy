@@ -416,6 +416,12 @@ Zuul中有以下几种典型的过滤器类型。
 
 * 刷新配置
 
+  当Git仓库中的配置信息更改后，而本地服务不重启，我们可以通过`SpringBoot Actuator`的refresh端点来刷新客户端已经缓存的配置信息，以下更改都需要在config-client中进行。
+
+  * 在pom.xml中添加Actuator的依赖：
+  * 在bootstrap.properties中开启refresh端点：
+  * 在ConfigClientController类添加@RefreshScope注解用于刷新配置
+
 `配置中心添加安全认证：`
 
 `config-server集群：`
