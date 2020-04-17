@@ -1,6 +1,8 @@
 package com.cyn.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +18,12 @@ import org.springframework.stereotype.Component;
 public class ImportFeature {
     private String var1 = "feature import";
     private Boolean var2 = true;
+
+    @Bean
+    @ConfigurationPropertiesBinding
+    public WeightConverter weightConverter(){
+        return new WeightConverter();
+    }
 
     public String getVar1() {
         return var1;

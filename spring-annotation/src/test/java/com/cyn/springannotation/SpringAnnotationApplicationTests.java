@@ -23,6 +23,9 @@ class SpringAnnotationApplicationTests {
     void getCongfig() {
         System.out.println(configurationPropertiesDemo.getTest1());
         System.out.println(configurationPropertiesDemo.getTest2());
+        System.out.println(configurationPropertiesDemo.getMylist().toString());
+        System.out.println(configurationPropertiesDemo.getTesttime());
+
     }
 
     @Test
