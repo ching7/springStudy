@@ -19,6 +19,9 @@ public class SpringAnnotationApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringAnnotationApplication.class, args);
+        /*ConfigurationPropertiesDemo configurationPropertiesDemo = context.getBean(ConfigurationPropertiesDemo.class);
+        System.out.println(configurationPropertiesDemo.getTest1());
+        System.out.println(configurationPropertiesDemo.getTest2());*/
     }
 
 }
