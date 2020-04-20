@@ -15,6 +15,7 @@ springStudy
 ├── springboot-validate --springboot基础：出入参合法性
 ├── springboot-view-freemarker --springboot整合视图层技术freemarker
 ├── springboot-view-jsp --springboot整合视图层技术jsp
+├── springboot-annotation --springboot常用注解以及配置文件
 ├── springcloud-cloud --springcloud组件简介
 ├── springcloud-eureka-ha --注册中心
 ├── springcloud-eureka-ha-consumer --服务生产者调用demo
@@ -83,6 +84,12 @@ springStudy
 
 * springboot整合freemarker视图层技术demo
 * springboot整合freemarker视图层技术jsp
+
+## springboot-annotation
+
+* springboot常用注解的介绍以及demo
+  * @ConfigurationProperties
+* springboot自定义配置文件介绍，配置类介绍
 
 ## springcloud-cloud
 
