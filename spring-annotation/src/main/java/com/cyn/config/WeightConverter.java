@@ -1,7 +1,6 @@
 package com.cyn.config;
 
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
 /**
@@ -14,7 +13,6 @@ import org.springframework.core.convert.converter.Converter;
  * @Version: 1.0
  * @Description: note
  **/
-@Configuration
 public class WeightConverter implements Converter<String,Weight> {
 
     @Override

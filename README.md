@@ -94,6 +94,7 @@ springStudy
 ## springcloud-cloud
 
 * springcloud框架组件介绍
+* 包括feign、hystrix、ribbon、zuul等
 
 ## springcloud-eureka
 

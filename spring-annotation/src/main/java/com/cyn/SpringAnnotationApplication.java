@@ -1,7 +1,9 @@
 package com.cyn;
 
+import com.cyn.config.CatImport;
 import com.cyn.config.ConfigurationPropertiesDemo;
 import com.cyn.config.ImportFeature;
+import com.cyn.init.PostConstructDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,15 +15,13 @@ import org.springframework.context.annotation.Import;
  * @author chenyn
  *
  */
-@Import(ImportFeature.class)
-@SpringBootApplication(scanBasePackages = {"com.cyn.config"})
+@Import({ImportFeature.class, CatImport.class})
+@SpringBootApplication(scanBasePackages = {"com.cyn"})
 public class SpringAnnotationApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringAnnotationApplication.class, args);
-        /*ConfigurationPropertiesDemo configurationPropertiesDemo = context.getBean(ConfigurationPropertiesDemo.class);
-        System.out.println(configurationPropertiesDemo.getTest1());
-        System.out.println(configurationPropertiesDemo.getTest2());*/
+        PostConstructDemo postConstructDemo = context.getBean(PostConstructDemo.class);
     }
 
 }
