@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 消息发送者
+ *
  * @author chenyn
  * @version 1.0
  * @date 2019/10/22 0:00
@@ -14,14 +15,16 @@ import org.springframework.stereotype.Component;
 public class Sender {
     @Autowired
     private AmqpTemplate rabbitAmqpTemplate;
+
     /**
      * 发送消息
+     *
      * @param msg
      */
-    public void send(String msg){
+    public void send(String msg) {
         //向消息队列发送消息
         //参数一 消息名称
         //参数二 消息
-        this.rabbitAmqpTemplate.convertAndSend("Hello-Queue",msg);
+        this.rabbitAmqpTemplate.convertAndSend("Hello-Queue" , msg);
     }
 }
