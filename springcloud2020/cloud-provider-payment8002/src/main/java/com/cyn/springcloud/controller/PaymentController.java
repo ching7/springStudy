@@ -30,7 +30,7 @@ public class PaymentController {
     @PostMapping(value = "/payment/create")
     public CommonResult<Payment> create(@RequestBody Payment payment) {
         int result = paymentService.create(payment);
-        log.info("*** {} ,insert result:{}", serverPort, result);
+        log.info("*** {},insert result:{}", serverPort, result);
         if (result > 0) {
             return new CommonResult<>(200, "insert success");
         } else {
@@ -47,7 +47,7 @@ public class PaymentController {
     @GetMapping(value = "/payment/get/{id}")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         Payment paymentById = paymentService.getPaymentById(id);
-        log.info("*** {} ,getPaymentById result:{}", serverPort, paymentById);
+        log.info("*** {} , getPaymentById result:{}", serverPort, paymentById);
         if (paymentById != null) {
             return new CommonResult<>(200, "query success", paymentById);
         } else {
