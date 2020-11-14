@@ -22,7 +22,7 @@ public class PaymentController {
      *
      * @return
      */
-    @PostMapping(value = "/payment/zk")
+    @GetMapping(value = "/payment/zk")
     public String paymentZk() {
         return "springcloud with zookeeper: " + serverPort + "\t" + UUID.randomUUID().toString();
     }
