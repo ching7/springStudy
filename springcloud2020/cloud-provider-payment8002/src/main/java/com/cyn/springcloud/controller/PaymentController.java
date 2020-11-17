@@ -49,7 +49,7 @@ public class PaymentController {
         Payment paymentById = paymentService.getPaymentById(id);
         log.info("*** {} , getPaymentById result:{}", serverPort, paymentById);
         if (paymentById != null) {
-            return new CommonResult<>(200, "query success", paymentById);
+            return new CommonResult<>(200, "query success:" + paymentById + ":" + serverPort);
         } else {
             return new CommonResult<>(500, "query error id:" + id, null);
         }
