@@ -2,6 +2,10 @@ package com.cyn.springcloud.controller;
 
 import com.cyn.springcloud.entities.CommonResult;
 import com.cyn.springcloud.entities.Payment;
+import com.cyn.springcloud.lb.LoadBalancer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.List;
 
 /**
  * @author chenyanan
@@ -18,9 +24,14 @@ import javax.annotation.Resource;
 public class OrderController {
 
     public static final String PAYMENT_URL = "http://CLOUD-PAYMENT-SERVICE";
-
+    public static final String PAYMENT_SERVICE_NAME = "CLOUD-PAYMENT-SERVICE";
     @Resource
     private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    @Autowired
+    private LoadBalancer loadBalancer;
 
     /**
      * 消费者新增
@@ -57,5 +68,21 @@ public class OrderController {
     @GetMapping(value = "/consumer/payment/get/{id}")
     public CommonResult getPayment(@PathVariable("id") Long id) {
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+    }
+
+    /**
+     * 自定义负载
+     *
+     * @return
+     */
+    @GetMapping(value = "/consumer/payment/lb")
+    public String getPaymentLb() {
+        List<ServiceInstance> instances = discoveryClient.getInstances(PAYMENT_SERVICE_NAME);
+        if (instances == null || instances.size() <= 0) {
+            return null;
+        }
+        ServiceInstance serviceInstance = loadBalancer.instances(instances);
+        URI uri = serviceInstance.getUri();
+        return restTemplate.getForObject(uri + "/payment/lb", String.class);
     }
 }
