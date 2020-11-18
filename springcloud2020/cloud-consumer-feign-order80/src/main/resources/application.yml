@@ -13,9 +13,18 @@ eureka:
     instance-id: feign-order80
     prefer-ip-address: true
     # 客户端向服务端发送心跳间隔 s
-    lease-renewal-interval-in-seconds: 2
+    # lease-renewal-interval-in-seconds: 2
     # 服务端最后一次收到心跳后，等待多少秒剔除服务
-    lease-expiration-duration-in-seconds: 1
+    # lease-expiration-duration-in-seconds: 1
 spring:
   application:
     name: cloud-order-service
+# feign 基于ribbon的远程调用超时时间设置
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+# feign日志
+logging:
+  level:
+    # 监控指定服务接口
+    com.cyn.sprongcloud.service.PaymentFeignService: debug
