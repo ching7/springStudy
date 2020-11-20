@@ -21,6 +21,7 @@ public class PaymentController {
 
     @Value("${server.port}")
     private String serverPort;
+    //==============服务降级
 
     /**
      * ok
@@ -44,6 +45,20 @@ public class PaymentController {
     @GetMapping("/payment/hystrix/timeout/{id}")
     public String paymentInfoTimeout(@PathVariable("id") Integer id) {
         String res = paymentService.paymentInfoTimeOut(id);
+        log.info("****res:" + res);
+        return res;
+    }
+    //==============服务熔断
+
+    /**
+     * 服务熔断
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/payment/hystrix/circuit/{id}")
+    public String paymentCircuitBreaker(@PathVariable("id") Integer id) {
+        String res = paymentService.paymentCircuitBreaker(id);
         log.info("****res:" + res);
         return res;
     }
