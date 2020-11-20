@@ -43,7 +43,6 @@ public class OrderController {
     public CommonResult create(Payment payment) {
         return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
     }
-
     /**
      * 消费者查询
      *

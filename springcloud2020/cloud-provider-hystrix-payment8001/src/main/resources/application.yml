@@ -1,0 +1,21 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: cloud-provider-hystrix-payment
+eureka:
+  client:
+    # 是否注册到eureka
+    register-with-eureka: true
+    # 是否从eureka抓取注册信息，单子点无所谓，多节点必须为true，配合ribbon是否
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  # eureka 显示自定义实例名称，显示ip
+  instance:
+    instance-id: payment8001
+    prefer-ip-address: true
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  # 可选，优化mappe.xml的实体类映射路径
+  # type-aliases-package: com.cyn.springcloud.entities
