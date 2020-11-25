@@ -60,7 +60,6 @@ public class PaymentService {
 
     /**
      * 模拟熔断
-     * ndler
      *
      * @param id
      * @return
