@@ -1,0 +1,29 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ching7/springcloud-config
+          search-paths:
+            - springcloud-config
+      label: master
+eureka:
+  client:
+    # 是否注册到eureka
+    register-with-eureka: true
+    # 是否从eureka抓取注册信息，单子点无所谓，多节点必须为true，配合ribbon是否
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  # eureka 显示自定义实例名称，显示ip
+  instance:
+    instance-id: cloud-config-center
+    prefer-ip-address: true
+    # 客户端向服务端发送心跳间隔 s
+    # lease-renewal-interval-in-seconds: 2
+    # 服务端最后一次收到心跳后，等待多少秒剔除服务
+    # lease-expiration-duration-in-seconds: 1
