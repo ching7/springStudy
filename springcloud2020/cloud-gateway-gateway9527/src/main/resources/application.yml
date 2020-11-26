@@ -19,6 +19,9 @@ spring:
           uri: lb://cloud-payment-service
           predicates:
             - Path=/payment/lb/**
+            #- After=2020-11-26T11:14:42.539+08:00[Asia/Shanghai]
+            #- Cookie=username,cyn
+            #- Header=X-Request-Id, \d+
 eureka:
   client:
     # 是否注册到eureka
