@@ -27,8 +27,8 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
   # eureka 显示自定义实例名称，显示ip
   # instance:
-    # instance-id: cloud-config-center
-    # prefer-ip-address: true
+    instance-id: cloud-config-center
+    prefer-ip-address: true
     # 客户端向服务端发送心跳间隔 s
     # lease-renewal-interval-in-seconds: 2
     # 服务端最后一次收到心跳后，等待多少秒剔除服务
@@ -39,4 +39,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: "bus-refresh"
+        include: 'bus-refresh'
