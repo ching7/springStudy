@@ -1,0 +1,16 @@
+package com.cyn.springcloud;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * @author chenyanan
+ * Created by chenyanan on 2020/11/30
+ */
+@SpringBootApplication
+public class ConfigClientMain3366 {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigClientMain3366.class, args);
+    }
+
+}

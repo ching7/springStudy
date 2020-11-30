@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author chenyanan
- * Created by chenyanan on 2020/11/27
+ * Created by chenyanan on 2020/11/30
  */
 // 刷新配置
 @RefreshScope
 @RestController
 public class ConfigClientController {
+
     @Value("${server.port:8080}")
     private String serverPort;
 
