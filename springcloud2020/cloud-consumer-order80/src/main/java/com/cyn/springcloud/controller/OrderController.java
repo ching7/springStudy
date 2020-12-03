@@ -43,6 +43,7 @@ public class OrderController {
     public CommonResult create(Payment payment) {
         return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
     }
+
     /**
      * 消费者查询
      *
@@ -83,5 +84,15 @@ public class OrderController {
         ServiceInstance serviceInstance = loadBalancer.instances(instances);
         URI uri = serviceInstance.getUri();
         return restTemplate.getForObject(uri + "/payment/lb", String.class);
+    }
+
+    /**
+     * 模拟链路调用
+     *
+     * @return
+     */
+    @GetMapping("/consumer/payment/zipkin")
+    public String paymentZipkin() {
+        return restTemplate.getForObject(PAYMENT_URL + "/payment/zipkin", String.class);
     }
 }

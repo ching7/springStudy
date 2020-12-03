@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -111,5 +112,15 @@ public class PaymentController {
             e.printStackTrace();
         }
         return serverPort;
+    }
+
+    /**
+     * zipkin 链路模拟调用
+     *
+     * @return
+     */
+    @GetMapping("/payment/zipkin")
+    public String paymentZipkin() {
+        return "hi ,i'am payment zipkin server fall back，serverPort: " + serverPort + ",UUID:" + UUID.randomUUID().toString();
     }
 }

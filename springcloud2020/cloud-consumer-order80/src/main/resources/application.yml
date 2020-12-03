@@ -13,9 +13,16 @@ eureka:
     instance-id: order80
     prefer-ip-address: true
     # 客户端向服务端发送心跳间隔 s
-    lease-renewal-interval-in-seconds: 2
+    # lease-renewal-interval-in-seconds: 2
     # 服务端最后一次收到心跳后，等待多少秒剔除服务
-    lease-expiration-duration-in-seconds: 1
+    # lease-expiration-duration-in-seconds: 1
 spring:
   application:
     name: cloud-order-service
+  # 服务链路可视化监控
+  zipkin:
+    base-url: http://127.0.0.1:9411
+  # 链路信息采集率
+  sleuth:
+    sampler:
+      probability: 1
