@@ -1,0 +1,18 @@
+# 配置文件bootstrap加载顺序高于application
+server:
+  port: 3377
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # 注册中心
+      config:
+        server-addr: localhost:8848 # 配置中心
+        file-extension: yaml # 指定配置文件格式
+        # group: TEST_GROUP
+        group: DEV_GROUP
+        namespace: 40b4a249-0f79-4e90-a968-98e6e1227601
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# nacos-config-client-dev.yaml
