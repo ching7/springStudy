@@ -6,7 +6,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.121.207:18846
+        server-addr: 192.168.121.207:8852
         service: nacos-payment-provider
 management:
   endpoints:
