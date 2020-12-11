@@ -5,6 +5,7 @@ import com.cyn.springcloud.domain.Order;
 import com.cyn.springcloud.service.AccountService;
 import com.cyn.springcloud.service.OrderService;
 import com.cyn.springcloud.service.StorageService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
     StorageService storageService;
 
     @Override
+    @GlobalTransactional(name = "cyn-order-create", rollbackFor = Exception.class)
     public void create(Order order) {
         log.info("====开始创建订单");
         orderDao.create(order);

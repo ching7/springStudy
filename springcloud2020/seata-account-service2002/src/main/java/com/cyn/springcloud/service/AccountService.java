@@ -19,6 +19,6 @@ public interface AccountService {
      * @return
      */
     @PostMapping(value = "/account/decrease")
-    CommonResult decrease(@RequestParam("userId") Long productId, @RequestParam("money") BigDecimal money);
+    CommonResult decrease(@RequestParam("userId") Long productId, @RequestParam("money") BigDecimal money) throws InterruptedException;
 
 }

@@ -3,7 +3,7 @@ package com.cyn.springcloud.controller;
 
 import com.cyn.springcloud.entities.CommonResult;
 import com.cyn.springcloud.service.AccountService;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +19,8 @@ public class AccountController {
     @Resource
     AccountService accountService;
 
-    @GetMapping("/account/decrease")
-    public CommonResult create(@RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money) {
+    @PostMapping("/account/decrease")
+    public CommonResult create(@RequestParam("userId") Long userId, @RequestParam("money") BigDecimal money) throws InterruptedException {
         accountService.decrease(userId, money);
         return new CommonResult(200, "减扣余额成功 success");
     }

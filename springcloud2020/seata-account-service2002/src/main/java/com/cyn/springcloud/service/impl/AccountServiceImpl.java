@@ -25,9 +25,10 @@ public class AccountServiceImpl implements AccountService {
      * 扣减账户余额
      */
     @Override
-    public CommonResult decrease(Long userId, BigDecimal money) {
+    public CommonResult decrease(Long userId, BigDecimal money) throws InterruptedException {
         log.info("------->account-service中扣减账户余额开始");
         accountDao.decrease(userId, money);
+        // Thread.sleep(20000);
         log.info("------->account-service中扣减账户余额结束");
         return new CommonResult(200, "账户余额成功！");
     }
