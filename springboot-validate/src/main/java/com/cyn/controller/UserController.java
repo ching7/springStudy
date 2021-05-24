@@ -8,10 +8,7 @@ import com.cyn.validated.ValidNum100;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -35,7 +32,7 @@ public class UserController {
      */
     @RequestMapping("/testValid")
     @ValidNum100(value = "10")
-    public String testValid(TestBean value) {
+    public String testValid(@Valid TestBean value) {
         TestBean testBean = new TestBean();
         testBean.setTestS("20S");
         testBean.setTestI(20);
