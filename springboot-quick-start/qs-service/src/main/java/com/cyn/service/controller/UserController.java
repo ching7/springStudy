@@ -19,10 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
     @Autowired
-    private UserService userService;
+    private static UserService userService;
 
     @RequestMapping("/qs/getUserInfo")
     public MyUser getUserInfo() {
        return userService.getUserInfo();
     }
+
+    @RequestMapping("/qs/getUserInfoStaticTest")
+    public MyUser getUserInfoStaticTest() {
+        return getTestBean();
+    }
+
 }

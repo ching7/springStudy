@@ -1,6 +1,9 @@
 package com.cyn.Dao;
 
+import com.cyn.bean.UserBean;
 import org.springframework.stereotype.Repository;
+
+import java.util.Random;
 
 /**
  * 文件描述
@@ -19,8 +22,12 @@ import org.springframework.stereotype.Repository;
  * Copyright © 2019 Hundsun Technologies Inc. All Rights Reserved
  **/
 @Repository
-public class UserDaoImpl {
+public class UserDao {
     public void saveUser(){
         System.out.println("添加用户");
+    }
+
+    public UserBean getUser() {
+        return new UserBean("testName", new Random().toString());
     }
 }

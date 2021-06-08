@@ -1,6 +1,7 @@
 package com.cyn.service;
 
-import com.cyn.Dao.UserDaoImpl;
+import com.cyn.Dao.UserDao;
+import com.cyn.bean.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +22,18 @@ import org.springframework.stereotype.Service;
  * Copyright © 2019 Hundsun Technologies Inc. All Rights Reserved
  **/
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserDaoImpl userDao;
+    private UserDao userDao;
 
+    @Override
     public void addUser(){
         userDao.saveUser();
+    }
+
+    @Override
+    public UserBean getUser() {
+        return userDao.getUser();
     }
 }
