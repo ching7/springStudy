@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @Description: 注入bean的时间点
- * 构造器(Constructor) >> @Resource(@Autowired) >> @PostConstruct >> inint()
+ * 构造器(Constructor) >> @Resource(@Autowired) >> @PostConstruct >> init()
  * @Author: ynchen9
  * @CreateTime: 2021-06-08
  */
