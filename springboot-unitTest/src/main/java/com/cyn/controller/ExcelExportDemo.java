@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import java.net.URLEncoder;
  * @Author: ynchen9
  * @CreateTime: 2021-07-06
  */
+@RestController
 public class ExcelExportDemo {
 
     @GetMapping("getExcel")
