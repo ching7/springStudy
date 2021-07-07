@@ -1,7 +1,11 @@
 package com.cyn;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
 /**
  * 文件描述
@@ -20,8 +24,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Copyright © 2019 Hundsun Technologies Inc. All Rights Reserved
  **/
 @SpringBootApplication
+//@PropertySources({
+//        @PropertySource(value = "application-cyn.properties", ignoreResourceNotFound = true)
+//})
 public class App {
     public static void main(String[] args) {
-        SpringApplication.run(App.class,args);
+        SpringApplication.run(App.class, args);
     }
 }

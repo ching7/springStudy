@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * 1.当前类为springBoot的测试类
  * 2.加载springboot启动类，启动springboot
  *
- * junit整合spring,@ContextConfiguration("classpath:application.xml")
+ * junit整合spring,@ContextConfiguration("classpath:application.properties.xml")
  *
  **/
 @RunWith(value = SpringJUnit4ClassRunner.class)
