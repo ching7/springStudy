@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.cyn.bean.UserBean;
 import org.json.JSONArray;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +38,28 @@ public class JsonController {
             response.getOutputStream().write(JSON.toJSONString(lisi).getBytes());
 
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PostMapping("addJson")
+    public void getExcel(HttpServletRequest request, HttpServletResponse httpResponse, MultipartFile jsonFile) throws IOException {
+        addDownloadTemplate(httpResponse, request, jsonFile);
+    }
+
+    private void addDownloadTemplate(HttpServletResponse response, HttpServletRequest request, MultipartFile jsonFile) throws IOException {
+
+        try {
+            InputStream inputStream = jsonFile.getInputStream();
+            InputStreamReader is = new InputStreamReader(inputStream);
+            BufferedReader br = new BufferedReader(is);
+            String s = "";
+
+            while ((s = br.readLine()) != null) {
+                //转成流文件后，就可以自己处理了
+                System.out.println(s);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
