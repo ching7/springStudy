@@ -58,6 +58,8 @@ public class JsonController {
             while ((s = br.readLine()) != null) {
                 //转成流文件后，就可以自己处理了
                 System.out.println(s);
+                UserBean userBean = JSON.parseObject(s, UserBean.class);
+                System.out.println(userBean);
             }
         } catch (Exception e) {
             e.printStackTrace();
