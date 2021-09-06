@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -33,9 +34,26 @@ public class TestRedis {
         String key = UUID.randomUUID().toString();
         Map seatQueueMap = JSONObject.parseObject(JSONObject.toJSONString(u), Map.class);
         redisUtils.hPutAll(key, seatQueueMap);
-        redisUtils.hPutAll(key+"_2", seatQueueMap);
+        redisUtils.hPutAll(key + "_2", seatQueueMap);
 
         redisUtils.expire(key, expireTime.longValue(), TimeUnit.SECONDS);
 
     }
+
+    @RequestMapping("redis/get")
+    public void getRedis(String search) {
+        Set<String> keys = redisUtils.keys(search);
+        keys.forEach(key -> {
+            Map<Object, Object> seatQueueMap = redisUtils.hGetAll(key);
+            System.out.println(seatQueueMap);
+            Long expire = redisUtils.getExpire(key, TimeUnit.SECONDS);
+            System.out.println(expire);
+        });
+    }
+
+    @RequestMapping("redis/persist")
+    public void persistRedis(String persistKey) {
+        Boolean persist = redisUtils.persist(persistKey);
+    }
+
 }
