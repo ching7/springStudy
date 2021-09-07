@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
  * <p>
  * Copyright © 2019 Hundsun Technologies Inc. All Rights Reserved
  **/
-@Service
+@Service("UserServiceImpl")
 public class UserServiceImpl implements UserService{
 
     @Autowired
@@ -29,6 +29,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void addUser(){
+        System.out.println("UserServiceImpl");
         userDao.saveUser();
     }
 

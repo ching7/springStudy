@@ -3,6 +3,7 @@ package com.cyn.controller;
 import com.cyn.bean.UserBean;
 import com.cyn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
 public class LoadOrderController {
     public static String text = "静态变量";
     @Autowired
+    @Qualifier("UserServiceImpl")
     UserService userService;
 
     LoadOrderController() {
