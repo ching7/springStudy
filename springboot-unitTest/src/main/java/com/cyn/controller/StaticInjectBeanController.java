@@ -2,7 +2,9 @@ package com.cyn.controller;
 
 import com.cyn.bean.UserBean;
 import com.cyn.service.UserService;
+import com.cyn.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,7 +45,8 @@ public class StaticInjectBeanController {
     //基于Setter的依赖注入
     private UserService userService;
     @Autowired
-    public void setUserService(UserService userService) {
+    @Qualifier("UserServiceImpl")
+    public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
     }
 
