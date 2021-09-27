@@ -1,5 +1,6 @@
 package com.cyn.controller;
 
+import com.cyn.annotation.PerfLog;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostMappingController {
     @PostMapping("/postMapping")
+    //@PerfLog
     public String getMappingT(String t1,
                               Character t2) {
         System.out.println(t1);

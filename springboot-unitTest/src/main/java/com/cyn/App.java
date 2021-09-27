@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.env.PropertiesPropertySourceLoader;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.ClassPathResource;
@@ -32,6 +33,7 @@ import java.util.List;
  * <p>
  **/
 @SpringBootApplication
+@EnableAspectJAutoProxy
 //@PropertySources({
 //        @PropertySource(value = "application-cyn.properties", ignoreResourceNotFound = true)
 //})
