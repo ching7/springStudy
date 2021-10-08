@@ -574,6 +574,7 @@ public class RedisUtils {
         return redisTemplate.opsForList().leftPush(key, value);
     }
 
+
     /**
      * L left push all long.
      *

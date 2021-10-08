@@ -1,5 +1,7 @@
 package com.cyn.threadDemo;
 
+import com.cyn.bean.UserBean;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,8 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AddSeatQueueController {
     @RequestMapping("/addSeatQueue")
-    public void addSeatQueue(String seatNo){
-        boolean add = SeatQueueCache.freeSeatQueue.add(seatNo);
+    public void addSeatQueue(UserBean user) {
+        boolean add = SeatQueueCache.freeSeatQueue.add(user);
         System.out.println(add);
     }
+
+    @RequestMapping("/removeSeatQueue")
+    public void removeSeatQueue(UserBean user) {
+        boolean add = SeatQueueCache.freeSeatQueue.remove(user);
+        System.out.println(add);
+    }
+
+
+
+
 }

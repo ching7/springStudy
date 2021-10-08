@@ -1,5 +1,6 @@
 package com.cyn.threadDemo;
 
+import com.cyn.bean.UserBean;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.Queue;
@@ -13,7 +14,7 @@ import java.util.concurrent.*;
 public class SeatQueueCache {
     public static ThreadPoolExecutor pool;
 
-    public static Queue<String> freeSeatQueue = new ConcurrentLinkedQueue<>();
+    public static Queue<UserBean> freeSeatQueue = new ConcurrentLinkedQueue<>();
 
     static {
         ThreadFactory seatQueueThreadFactory = new ThreadFactoryBuilder()

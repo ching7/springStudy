@@ -2,6 +2,7 @@ package com.cyn.redis;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cyn.bean.UserBean;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @CreateTime: 2021-09-01
  */
 @RestController
-public class TestRedis {
+public class TestRedisController {
 
     private static RedisUtils redisUtils;
 
@@ -34,8 +35,7 @@ public class TestRedis {
         String key = UUID.randomUUID().toString();
         Map seatQueueMap = JSONObject.parseObject(JSONObject.toJSONString(u), Map.class);
         redisUtils.hPutAll(key, seatQueueMap);
-        redisUtils.hPutAll(key + "_2", seatQueueMap);
-
+        // redisUtils.hPutAll(key + "_2", seatQueueMap);
         redisUtils.expire(key, expireTime.longValue(), TimeUnit.SECONDS);
 
     }
