@@ -31,29 +31,29 @@
 //    //过期事件监听
 //    private static final String EXPIRED_CHANNEL = "__keyevent@0__:expired";
 //
-//    @Value("${spring.redis.cluster.nodes}")
+//    @Value("${spring.redis.cluster.nodes:127.0.0.1:6379}")
 //    private String clusterNodes;
 //
-//    @Value("${spring.redis.password}")
+//    @Value("${spring.redis.password:00}")
 //    private String password;
 //
 //    @Override
 //    public void run(ApplicationArguments args) throws Exception {
 //        log.info("过期事件，启动监听......");
 //        //项目启动后就运行该方法
-//        startListener();
+//        startExpiredListener();
 //    }
 //
 //    /**
 //     * 启动监听
 //     */
 //    @SuppressWarnings("unchecked")
-//    public void startListener() {
-//        //redis集群监听
+//    public void startExpiredListener() {
+//        // redis集群监听
 //        String[] redisNodes = clusterNodes.split(",");
-//        //监听其中一个端口号即可
+//        // 监听其中一个端口号即可
 //        RedisURI redisURI = RedisURI.create("redis://" + redisNodes[0]);
-//        redisURI.setPassword(password);
+//        // redisURI.setPassword(password);
 //        RedisClusterClient clusterClient = RedisClusterClient.create(redisURI);
 //
 //        StatefulRedisClusterPubSubConnection<String, String> pubSubConnection = clusterClient.connectPubSub();

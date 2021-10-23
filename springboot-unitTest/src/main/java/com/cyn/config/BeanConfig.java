@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class BeanConfig {
-    @Bean(initMethod = "init")
-    public WsTest initWsTest() {
-        return new WsTest();
-    }
-
-    @Bean(initMethod = "init")
-    public static SeatConsumer configureMaintask() {
-        SeatConsumer bean = new SeatConsumer();
-        return bean;
-    }
+//    @Bean(initMethod = "init")
+//    public WsTest initWsTest() {
+//        return new WsTest();
+//    }
+//
+//    @Bean(initMethod = "init")
+//    public static SeatConsumer configureMaintask() {
+//        SeatConsumer bean = new SeatConsumer();
+//        return bean;
+//    }
 }

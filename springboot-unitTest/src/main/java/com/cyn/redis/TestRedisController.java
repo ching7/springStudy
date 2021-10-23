@@ -34,6 +34,7 @@ public class TestRedisController {
         UserBean u = new UserBean("wanger", "13");
         String key = UUID.randomUUID().toString();
         Map seatQueueMap = JSONObject.parseObject(JSONObject.toJSONString(u), Map.class);
+        redisUtils.set(key, u.toString());
         redisUtils.hPutAll(key, seatQueueMap);
         // redisUtils.hPutAll(key + "_2", seatQueueMap);
         redisUtils.expire(key, expireTime.longValue(), TimeUnit.SECONDS);
