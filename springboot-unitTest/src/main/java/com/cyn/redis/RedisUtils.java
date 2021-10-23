@@ -1,7 +1,6 @@
 package com.cyn.redis;
 
 import com.cyn.utils.SpringBeanUtils;
-import com.sun.javafx.fxml.BeanAdapter;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.ScanOptions;
