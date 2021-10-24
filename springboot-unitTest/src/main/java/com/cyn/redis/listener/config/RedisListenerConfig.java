@@ -1,6 +1,6 @@
 package com.cyn.redis.listener.config;
 
-import com.cyn.redis.listener.all.RedisExpiredListener;
+//import com.cyn.redis.listener.all.RedisExpiredListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -22,9 +22,9 @@ public class RedisListenerConfig {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         // 设置监听的Topic: PatternTopic/ChannelTopic
-        Topic topic = new PatternTopic(LISTENER_PATTERN);
+        //Topic topic = new PatternTopic(LISTENER_PATTERN);
         //设置监听器
-        container.addMessageListener(new RedisExpiredListener(), topic);
+       // container.addMessageListener(new RedisExpiredListener(), topic);
         return container;
     }
 }
