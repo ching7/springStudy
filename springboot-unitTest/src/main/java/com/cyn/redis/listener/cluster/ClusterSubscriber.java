@@ -28,8 +28,9 @@
 //
 //    private static Logger log = LoggerFactory.getLogger(ClusterSubscriber.class);
 //
-//    //过期事件监听
+//    //过期事件监听,此种集群监听的情况下不支持*pi配
 //    private static final String EXPIRED_CHANNEL = "__keyevent@0__:expired";
+//    private static final String HSET_CHANNEL = "__keyevent@0__:hset";
 //
 //    @Value("${spring.redis.cluster.nodes:127.0.0.1:6379}")
 //    private String clusterNodes;
@@ -73,6 +74,6 @@
 //        PubSubAsyncNodeSelection<String, String> masters = pubSubConnection.async().masters();
 //        NodeSelectionPubSubAsyncCommands<String, String> commands = masters.commands();
 //        //设置订阅消息类型，一个或多个
-//        commands.subscribe(EXPIRED_CHANNEL);
+//        commands.subscribe(EXPIRED_CHANNEL,HSET_CHANNEL);
 //    }
 //}
