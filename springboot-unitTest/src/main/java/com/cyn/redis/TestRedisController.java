@@ -32,12 +32,16 @@ public class TestRedisController {
     @RequestMapping("redis/addObj")
     public void addRedis(Integer expireTime) {
         UserBean u = new UserBean("wanger", "13");
-        String key = UUID.randomUUID().toString();
+        String key1 = "setHash:" + UUID.randomUUID().toString();
+        String key2 = "setHash:" + UUID.randomUUID().toString();
+
         Map seatQueueMap = JSONObject.parseObject(JSONObject.toJSONString(u), Map.class);
-        redisUtils.set(key, u.toString());
-        redisUtils.hPutAll(key, seatQueueMap);
+        //redisUtils.set(key1, key1);
+        //redisUtils.expire(key1, expireTime.longValue(), TimeUnit.SECONDS);
+
+        redisUtils.hPutAll(key2, seatQueueMap);
         // redisUtils.hPutAll(key + "_2", seatQueueMap);
-        redisUtils.expire(key, expireTime.longValue(), TimeUnit.SECONDS);
+        //redisUtils.expire(key2, expireTime.longValue(), TimeUnit.SECONDS);
 
     }
 
