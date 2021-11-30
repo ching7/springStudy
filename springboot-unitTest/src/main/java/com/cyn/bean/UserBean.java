@@ -1,5 +1,8 @@
 package com.cyn.bean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,8 +11,17 @@ import java.util.Objects;
  * @Author: ynchen9
  * @CreateTime: 2021-06-08
  */
+@ApiModel(value = "UserBean", description = "用户")
 public class UserBean implements Serializable {
+    /**
+     * 名称
+     */
+    @ApiModelProperty(value = "名称", required = true)
     private String name;
+    /**
+     * 年龄
+     */
+    @ApiModelProperty(value = "年龄")
     private String age;
     private static final long SerializableId = 1L;
 

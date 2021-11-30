@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,6 +38,7 @@ import java.util.List;
 //@PropertySources({
 //        @PropertySource(value = "application-cyn.properties", ignoreResourceNotFound = true)
 //})
+@EnableSwagger2
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
