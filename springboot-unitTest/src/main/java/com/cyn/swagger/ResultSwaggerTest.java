@@ -21,13 +21,8 @@ public class ResultSwaggerTest {
      */
     @ApiOperation(value = "test get", notes = "", httpMethod = "GET")
     @GetMapping("/swagger/test/get")
-    public ResultDataBase<UserBean> getUser() {
+    public ResultDataStd<UserBean> getUser() {
         UserBean userBean = new UserBean("wanger", "123");
-        ResultDataBase<UserBean> result = new ResultDataBase<>();
-        result.setSuccess(true);
-        result.setCode("200");
-        result.setData(userBean);
-        result.setMessage("success user");
-        return result;
+        return ResultDataStd.ok().setResultData(userBean);
     }
 }

@@ -1,5 +1,10 @@
 package com.cyn.swagger;
 
+import com.cyn.swagger.base.BaseErrorCode;
+import com.cyn.swagger.base.IMessage;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 /**
@@ -7,7 +12,9 @@ import java.util.Date;
  * @Author: ynchen9
  * @CreateTime: 2021-11-30
  */
-public class ResultDataStd<T> extends ResultDataBase {
+@ApiModel(value = "ResultDataStd", description = "")
+public class ResultDataStd<T> extends ResultDataBase<T> {
+    @ApiModelProperty(value = "", required = true)
     private static final long serialVersionUID = -7268040542410707954L;
 
     public ResultDataStd() {
@@ -55,7 +62,7 @@ public class ResultDataStd<T> extends ResultDataBase {
     }
 
     private static <T> ResultDataStd<T> baseCreate(String code, String msg, boolean success) {
-        ResultDataStd result = new ResultDataStd();
+        ResultDataStd<T> result = new ResultDataStd<T>();
         result.setCode(code);
         result.setSuccess(success);
         result.setMessage(msg);
@@ -63,7 +70,7 @@ public class ResultDataStd<T> extends ResultDataBase {
         return result;
     }
 
-    public ResultDataStd<T> setResult(T data) {
+    public ResultDataStd<T> setResultData(T data) {
         this.setData(data);
         return this;
     }
