@@ -65,6 +65,36 @@
         </plugins>
         <finalName>cas</finalName>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <!--数据库认证相关 start-->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-drivers</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>5.0.3.RELEASE</version>
+        </dependency>
+        <!--自定义加密-->
+
+    </dependencies>
 
     <properties>
         <cas.version>5.3.16</cas.version>
@@ -129,22 +159,7 @@
                 <!--
                 ...Additional dependencies may be placed here...
                 -->
-                <!--数据库认证相关 start-->
-                <dependency>
-                    <groupId>org.apereo.cas</groupId>
-                    <artifactId>cas-server-support-jdbc</artifactId>
-                    <version>${cas.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apereo.cas</groupId>
-                    <artifactId>cas-server-support-jdbc-drivers</artifactId>
-                    <version>${cas.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>${mysql.driver.version}</version>
-                </dependency>
+
             </dependencies>
         </profile>
 
