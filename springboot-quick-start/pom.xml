@@ -12,6 +12,7 @@
         <module>qs-api</module>
         <module>qs-pub</module>
         <module>qs-service</module>
+        <module>qs-thirdparty</module>
     </modules>
 
     <parent>
