@@ -3,16 +3,16 @@ server:
   port: 3377
 spring:
   application:
-    name: nacos-config-client
+    name: aiccdev
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848 # 注册中心
+        server-addr: 172.30.13.9:8848 # 注册中心
       config:
-        server-addr: localhost:8848 # 配置中心
-        file-extension: yaml # 指定配置文件格式
+        server-addr: 172.30.13.9:8848 # 配置中心
+        file-extension: properties # 指定配置文件格式
         # group: TEST_GROUP
-        group: DEV_GROUP
-        namespace: 40b4a249-0f79-4e90-a968-98e6e1227601
+        group: AICCDEV
+        namespace: fdf97521-96a9-41fd-9598-ab326c892c68
 # ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
 # nacos-config-client-dev.yaml

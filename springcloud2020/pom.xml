@@ -58,7 +58,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.2.2.RELEASE</version>
+                <version>2.3.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -74,7 +74,7 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.1.0.RELEASE</version>
+                <version>2.2.5.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -117,16 +117,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-<!--    <build> 
-        <plugins>   
-            <plugin>    
-                <groupId>org.springframework.boot</groupId>     
-                <artifactId>spring-boot-maven-plugin</artifactId>     
-                <configuration>       
-                    <fork>true</fork>       
-                    <addResources>true</addResources>     
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>-->
 </project>
