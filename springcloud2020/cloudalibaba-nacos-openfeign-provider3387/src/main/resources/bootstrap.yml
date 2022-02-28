@@ -11,6 +11,10 @@ spring:
     nacos:
       discovery:
         server-addr: 172.30.13.9:8848 # 注册中心
+  zipkin:
+    base-url: http://172.30.13.9:9411
+    sender:
+      type: web
 #      config:
 #        server-addr: 172.30.13.9:8848 # 配置中心
 #        file-extension: properties # 指定配置文件格式
