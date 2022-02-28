@@ -38,6 +38,7 @@
         <module>seata-order-service2001</module>
         <module>seata-storage-service2003</module>
         <module>seata-account-service2002</module>
+        <module>cloudalibaba-nacos-openfeign-provider3387</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,7 +59,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.3.2.RELEASE</version>
+                <version>2.2.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -74,7 +75,7 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.2.5.RELEASE</version>
+                <version>2.1.0.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

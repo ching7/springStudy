@@ -1,0 +1,21 @@
+# 配置文件bootstrap加载顺序高于application
+server:
+  port: 3387
+feign:
+  hystrix:
+    enabled: true
+spring:
+  application:
+    name: aicc-openfeign
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.30.13.9:8848 # 注册中心
+#      config:
+#        server-addr: 172.30.13.9:8848 # 配置中心
+#        file-extension: properties # 指定配置文件格式
+#        # group: TEST_GROUP
+#        group: AICCDEV
+#        namespace: fdf97521-96a9-41fd-9598-ab326c892c68
+## ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+## nacos-config-client-dev.yaml
