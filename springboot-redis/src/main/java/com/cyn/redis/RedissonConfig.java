@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
+/**
+ * @author chenyanan
+ */
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class RedissonConfig {

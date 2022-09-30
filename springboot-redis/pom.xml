@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
+        <version>2.7.3</version>
     </parent>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -31,11 +31,12 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
-        <dependency>
+        <!--reids 7+-->
+<!--        <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
             <version>5.3.7.RELEASE</version>
-        </dependency>
+        </dependency>-->
         <!--redisson-->
         <dependency>
             <groupId>org.redisson</groupId>
