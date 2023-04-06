@@ -1,0 +1,9 @@
+.idea
+document
+*.iml
+*/target
+**/target
+springboot-unitTest/hellostart-sso/.DS_Store
+springboot-unitTest/.DS_Store
+**/.DS_Store
+**/.mvn
