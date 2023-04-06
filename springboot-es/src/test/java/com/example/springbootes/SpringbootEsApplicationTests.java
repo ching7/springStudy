@@ -1,6 +1,6 @@
 package com.example.springbootes;
 
-import com.example.springbootes.Dao.SysUserDao;
+import com.example.springbootes.Service.SysUserService;
 import com.example.springbootes.entity.SysUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import java.util.Random;
 public class SpringbootEsApplicationTests {
 
     @Resource
-    SysUserDao sysUserDao;
+    SysUserService sysUserService;
 
     @Test
     public void testInsert() {
@@ -28,22 +28,38 @@ public class SpringbootEsApplicationTests {
         list.add("leader");
         for (int i = 0; i < 10; i++) {
             int toIndex = new Random(1).nextInt(4);
-            SysUser build = SysUser.builder()
-                    .password("123456")
-                    .username("AI码师")
-                    .level(i)
-                    .roles(list.subList(0, toIndex))
-                    .build();
-            sysUserDao.save(build);
+            SysUser sysUser = new SysUser();
+            sysUser.setPassword("123456");
+            sysUser.setUsername("AI码师" + i);
+            sysUser.setLevel(i);
+            sysUser.setRoles(list.subList(0, toIndex));
+            sysUserService.save(sysUser);
         }
         System.out.printf("结束");
     }
 
     @Test
     public void testFindAll() {
-        Iterable<SysUser> all = sysUserDao.findAll();
+        Iterable<SysUser> all = sysUserService.findAll();
         all.forEach((sysUser) -> {
             System.out.printf(sysUser.getId());
         });
+    }
+
+    @Test
+    public void testFindAllAndDel() {
+        Iterable<SysUser> all = sysUserService.findAll();
+        all.forEach((sysUser) -> {
+            System.out.printf(sysUser.getId());
+            sysUserService.deleteById(sysUser.getId());
+        });
+    }
+
+    @Test
+    public void findByName() {
+        List<SysUser> all = sysUserService.findAllByNameUsingAnnotations("8");
+        all.forEach(
+                System.out::println
+        );
     }
 }

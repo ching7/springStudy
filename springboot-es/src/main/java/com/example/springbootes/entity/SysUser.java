@@ -1,6 +1,7 @@
 package com.example.springbootes.entity;
 
 import lombok.Builder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -17,7 +18,6 @@ import java.util.List;
  * @Date 2023/4/6 09:51
  * @Version V1.0.0
  */
-@Builder
 @Document(indexName = "sys_user")
 public class SysUser {
     /**

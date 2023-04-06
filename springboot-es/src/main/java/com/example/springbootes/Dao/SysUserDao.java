@@ -1,8 +1,11 @@
 package com.example.springbootes.Dao;
 
 import com.example.springbootes.entity.SysUser;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @ClassName service
@@ -12,6 +15,16 @@ import org.springframework.stereotype.Repository;
  * @Version V1.0.0
  */
 @Repository
-public interface SysUserDao extends ElasticsearchRepository<SysUser,String> {
+public interface SysUserDao extends ElasticsearchRepository<SysUser, String> {
+    List<SysUser> findByUsername(String username);
 
+    //自定义查询语句
+    @Query("{\"match\":{\"username\":\"?0\"}}")
+    List<SysUser> findAllByUsernameUsingAnnotations(String username);
+
+    @Override
+    Iterable<SysUser> findAll();
+
+    @Override
+    void deleteById(String id);
 }
