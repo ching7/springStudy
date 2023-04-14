@@ -1,0 +1,20 @@
+cas:
+  server:
+    context: http://172.30.12.224:8980/uap-server/
+  client:
+    context: http://localhost:8190/login/
+rest:
+  server:
+    url: http://172.30.12.224:8888/rest/
+spring:
+  session:
+    store-type: NONE
+server:
+  port: 8190
+# 集成方应用的应用code，在uap-manager的应用管理中查看
+app:
+  code: aicc
+  # 集成方应用的应用授权码，在uap-manager的应用管理中查看
+  auth:
+    code: JSGR5IPH8P7720Q8F64J1HCWWJRNMNIR
+#cas.client.redirect=http://192.168.0.181:8080/agent
