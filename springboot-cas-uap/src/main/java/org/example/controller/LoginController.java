@@ -44,6 +44,7 @@ public class LoginController {
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute(Constant.SESSION_USER);
         request.getSession().invalidate();
+        //登出的 cas.client.context 需要在uap的应用管理配置否则无法进行登出跳转
         return "redirect:" + Constant.getCasLogoutUrl(request.getContextPath());
     }
 }
