@@ -1,12 +1,12 @@
 package com.example.springbootes.entity;
 
-import lombok.Builder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,13 +19,16 @@ import java.util.List;
  * @Version V1.0.0
  */
 @Document(indexName = "sys_user")
-public class SysUser {
+public class SysUser implements Serializable {
     /**
      * ES中id不能定义为Long
      * 主键
      */
     @Id
     private String id;
+    // 通过@Version注解指定版本号的属性字段
+    @Version
+    private Long version;
     private String username;
     private String password;
     private int level;

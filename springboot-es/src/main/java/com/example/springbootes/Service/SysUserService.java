@@ -2,14 +2,24 @@ package com.example.springbootes.Service;
 
 import com.example.springbootes.Dao.SysUserDao;
 import com.example.springbootes.entity.SysUser;
+import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.document.Document;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName SysUserService
@@ -20,6 +30,7 @@ import java.util.List;
  */
 @Service
 public class SysUserService {
+
     @Resource
     private SysUserDao sysUserDao;
 

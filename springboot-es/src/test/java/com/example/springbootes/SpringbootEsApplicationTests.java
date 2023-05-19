@@ -1,13 +1,16 @@
 package com.example.springbootes;
 
+import com.example.springbootes.Service.EsConfigService;
 import com.example.springbootes.Service.SysUserService;
 import com.example.springbootes.entity.SysUser;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +21,8 @@ public class SpringbootEsApplicationTests {
 
     @Resource
     SysUserService sysUserService;
-
+    @Resource
+    private EsConfigService esConfigService;
     @Test
     public void testInsert() {
         List<String> list = new ArrayList<>();
@@ -61,5 +65,35 @@ public class SpringbootEsApplicationTests {
         all.forEach(
                 System.out::println
         );
+    }
+
+    @Test
+    public void getCurrentSeqNo() {
+        List<SysUser> all = sysUserService.findAllByNameUsingAnnotations("8");
+        all.forEach(
+                System.out::println
+        );
+    }
+
+    @Test
+    public void updateIndexReplicas() throws IOException {
+        AcknowledgedResponse acknowledgedResponse = esConfigService.updateNumberOfReplicas("sys_user", 2);
+        boolean acknowledged = acknowledgedResponse.isAcknowledged();
+        System.out.println(acknowledged);
+    }
+    @Test
+    public void updateAliases() throws IOException {
+        AcknowledgedResponse acknowledgedResponse = esConfigService.updateAliases("sys_user1", "sys_user");
+        boolean acknowledged = acknowledgedResponse.isAcknowledged();
+        System.out.println(acknowledged);
+    }
+    @Test
+    public void autoFollowSet() throws IOException {
+        org.elasticsearch.client.core.AcknowledgedResponse acknowledgedResponse = esConfigService.autoFollowSet("my-auto-follow",
+                "es-212",
+                "leader-index-pattern-*",
+                "index-pattern-*");
+        boolean acknowledged = acknowledgedResponse.isAcknowledged();
+        System.out.println(acknowledged);
     }
 }
