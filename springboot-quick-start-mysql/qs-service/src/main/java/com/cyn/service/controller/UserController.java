@@ -3,8 +3,11 @@ package com.cyn.service.controller;
 import com.cyn.api.entity.MyUser;
 import com.cyn.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 文件描述
@@ -18,17 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class UserController {
-    @Autowired
-    private static UserService userService;
+    @Resource
+    private  UserService userService;
 
-    @RequestMapping("/qs/getUserInfo")
+    @GetMapping("/qs/getUserInfo")
     public MyUser getUserInfo() {
        return userService.getUserInfo();
     }
 
-    @RequestMapping("/qs/getUserInfoStaticTest")
+    @GetMapping("/qs/getUserInfoStaticTest")
     public MyUser getUserInfoStaticTest() {
-        return userService.getUserInfo();
+        return  userService.getUserInfo();
     }
 
 }
