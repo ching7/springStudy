@@ -1,4 +1,4 @@
-package com.cyn;
+package com.cyn.controller;
 
 import org.springframework.web.bind.annotation.*;
 
