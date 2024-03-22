@@ -7,25 +7,25 @@ package com.cyn.config;
  * @Date 2024/3/21 17:53
  * @Version V1.0.0
  */
+
 import java.io.IOException;
 
+import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.session.data.redis.RedisOperationsSessionRepository;
 import org.springframework.session.data.redis.config.ConfigureRedisAction;
-import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 
 
 /**
@@ -47,8 +47,8 @@ public class RedisConfig {
     private static final String REDIS_PREFIX = "redis://";
 
     public static RedisSerializer<String> KEY_SERIALIZER = new StringRedisSerializer();
-
-    public static RedisSerializer<Object> VALUE_SERIALIZER = new GenericFastJsonRedisSerializer();
+    // public static RedisSerializer<Object> VALUE_SERIALIZER = new GenericFastJsonRedisSerializer();
+    public static GenericToStringSerializer VALUE_SERIALIZER = new GenericToStringSerializer(Object.class);
 
     @Bean
     public static ConfigureRedisAction configureRedisAction() {
@@ -63,6 +63,7 @@ public class RedisConfig {
     public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
         return VALUE_SERIALIZER;
     }
+
     @Bean
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
@@ -93,7 +94,7 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedissonClient redisson() throws IOException {
+    public RedissonClient redisson() {
         // 1.创建配置
         Config config = new Config();
         // 集群模式

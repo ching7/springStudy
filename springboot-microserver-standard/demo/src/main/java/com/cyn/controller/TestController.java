@@ -1,6 +1,9 @@
 package com.cyn.controller;
 
+import com.cyn.service.IdService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @Description:
@@ -103,5 +106,14 @@ public class TestController {
             return " v2 get:" + id;
         }
         return version + " get:" + id;
+    }
+
+    @Resource
+    IdService idService;
+
+    @GetMapping("/v1/pb/test/uid/get/{table}")
+    public String getUid(@PathVariable("table") String table) {
+        idService.getUid(table);
+        return String.valueOf(idService.getUid(table));
     }
 }

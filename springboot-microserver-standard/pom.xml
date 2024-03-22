@@ -11,7 +11,7 @@
     <!--所有微服务项目的parent,管理依赖版本，maven仓库-->
     <groupId>com.cyn.microserverstandardboot</groupId>
     <artifactId>springboot-microserver-standard</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <!--pojo形式约定各种开发规范，各种二方，三方组件的autoConfig-->
@@ -30,6 +30,8 @@
         <maven.compiler.target>8</maven.compiler.target>
         <java.version>1.8</java.version>
         <lombok.version>1.16.20</lombok.version>
+        <spring-cloud-alibaba.version>2.1.2.RELEASE</spring-cloud-alibaba.version>
+
     </properties>
 
     <!--依赖管理-->
@@ -46,7 +48,7 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.1.2.RELEASE</version>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

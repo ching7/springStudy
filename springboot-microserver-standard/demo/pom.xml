@@ -6,7 +6,7 @@
     <parent>
         <artifactId>springboot-microserver-standard</artifactId>
         <groupId>com.cyn.microserverstandardboot</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <groupId>org.example</groupId>
     <artifactId>demo</artifactId>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.cyn.microserverstandardboot</groupId>
             <artifactId>start</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.redisson</groupId>
@@ -31,6 +31,26 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.83</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>6.2.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>3.4.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.6.5</version>
         </dependency>
     </dependencies>
     <build>
