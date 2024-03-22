@@ -1,5 +1,7 @@
 package com.cyn.controller;
 
+import com.cyn.SnowIdUtils;
+import com.cyn.core.id.SnowflakeIdGenerator;
 import com.cyn.service.IdService;
 import org.springframework.web.bind.annotation.*;
 
@@ -113,7 +115,10 @@ public class TestController {
 
     @GetMapping("/v1/pb/test/uid/get/{table}")
     public String getUid(@PathVariable("table") String table) {
-        idService.getUid(table);
-        return String.valueOf(idService.getUid(table));
+        // idService.getUid(table);
+        long l = SnowIdUtils.getInstance().nextId();
+        SnowflakeIdGenerator.DecodedSnowflakeId decode = SnowIdUtils.getInstance().decode(l);
+        System.out.println(decode.toString());
+        return String.valueOf(l);
     }
 }
