@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisKeyValueTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
@@ -47,8 +48,9 @@ public class RedisConfig {
     private static final String REDIS_PREFIX = "redis://";
 
     public static RedisSerializer<String> KEY_SERIALIZER = new StringRedisSerializer();
-    // public static RedisSerializer<Object> VALUE_SERIALIZER = new GenericFastJsonRedisSerializer();
-    public static GenericToStringSerializer VALUE_SERIALIZER = new GenericToStringSerializer(Object.class);
+    public static RedisSerializer<Object> VALUE_SERIALIZER = new GenericFastJsonRedisSerializer();
+
+    public static GenericToStringSerializer ID_VALUE_SERIALIZER = new GenericToStringSerializer(Object.class);
 
     @Bean
     public static ConfigureRedisAction configureRedisAction() {
@@ -92,7 +94,6 @@ public class RedisConfig {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
-
     @Bean
     public RedissonClient redisson() {
         // 1.创建配置

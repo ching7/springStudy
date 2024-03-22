@@ -24,18 +24,6 @@ public class RedissonConfig {
     @Value("${spring.redis.password:}")
     private String password;
 
-    @Value("${spring.redis.maxTotal:}")
-    private String maxTotal;
-
-    @Value("${spring.redis.maxIdle:}")
-    private String maxIdle;
-
-    @Value("${spring.redis.minIdle:}")
-    private String minIdle;
-
-    @Value("${spring.redis.maxWaitMillis:}")
-    private String maxWaitMillis;
-
     @Bean
     public RedissonClient redissonClient() throws Exception {
         if (!StrUtil.isBlank(port)) {
