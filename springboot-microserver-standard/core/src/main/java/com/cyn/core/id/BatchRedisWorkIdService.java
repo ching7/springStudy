@@ -1,7 +1,5 @@
 package com.cyn.core.id;
 
-import java.net.UnknownHostException;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
@@ -9,7 +7,6 @@ import javax.annotation.PostConstruct;
 import com.cyn.core.util.InetUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;

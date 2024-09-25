@@ -21,11 +21,6 @@ public class SnowIdUtils {
         if (null == obj) {
             synchronized (SnowIdUtils.class) {
                 if (null == obj) {
-                    // StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-                    // stringRedisTemplate.setKeySerializer(stringRedisSerializer);
-                    // stringRedisTemplate.setValueSerializer(stringRedisSerializer);
-                    // stringRedisTemplate.setHashKeySerializer(stringRedisSerializer);
-                    // stringRedisTemplate.setHashValueSerializer(stringRedisSerializer);
                     obj = new SnowflakeIdGenerator(1, 1);
                 }
             }

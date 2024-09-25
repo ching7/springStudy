@@ -3,9 +3,11 @@ package com.cyn.controller;
 import com.cyn.SnowIdUtils;
 import com.cyn.core.id.SnowflakeIdGenerator;
 import com.cyn.service.IdService;
+import org.junit.Test;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Description:
@@ -114,11 +116,25 @@ public class TestController {
     IdService idService;
 
     @GetMapping("/v1/pb/test/uid/get/{table}")
-    public String getUid(@PathVariable("table") String table) {
-        // idService.getUid(table);
+    public long getUid(@PathVariable("table") String table) {
+        idService.getUid(table);
         long l = SnowIdUtils.getInstance().nextId();
         SnowflakeIdGenerator.DecodedSnowflakeId decode = SnowIdUtils.getInstance().decode(l);
-        System.out.println(decode.toString());
-        return String.valueOf(l);
+        System.out.println(l);
+        return l;
+    }
+
+    @GetMapping("/v1/pb/test/uid/getUidTest")
+    public long getUidTest(@RequestBody String table) {
+        idService.getUid(table);
+        long l = SnowIdUtils.getInstance().nextId();
+        SnowflakeIdGenerator.DecodedSnowflakeId decode = SnowIdUtils.getInstance().decode(l);
+        System.out.println(l);
+        return l;
+    }
+
+    public List<String> test(List<String> skId) {
+        skId.forEach(System.out::println);
+        return skId;
     }
 }
